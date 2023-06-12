@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-
+import 'package:showcaseview/showcaseview.dart';
 
 ValueNotifier<ThemeMode> themeModeNotifier =
     ValueNotifier<ThemeMode>(ThemeMode.light);
@@ -38,7 +38,14 @@ class MyApp extends StatelessWidget {
               colorScheme: darkColorScheme,
               fontFamily: 'Janna'),
           themeMode: value,
-          home: Directionality(textDirection: TextDirection.rtl, child: Home()),
+          home: Directionality(
+            textDirection: TextDirection.rtl,
+            child: ShowCaseWidget(builder: Builder(
+              builder: (BuildContext context) {
+                return Home();
+              },
+            )),
+          ),
         );
       },
     );
@@ -64,6 +71,11 @@ class _HomeState extends State<Home> {
               var nextDouble = Random().nextInt(500);
               fakeBalance = nextDouble.toDouble();
             }));
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        ShowCaseWidget.of(context).startShowCase([_one, _tow]);
+      },
+    );
   }
 
   @override
@@ -136,6 +148,10 @@ class _HomeState extends State<Home> {
     );
   }
 
+  final GlobalKey _one = GlobalKey();
+
+  final GlobalKey _tow = GlobalKey();
+
   Widget _drawHomePageContent(context) {
     return SingleChildScrollView(
       child: Center(
@@ -146,158 +162,151 @@ class _HomeState extends State<Home> {
             ),
             SleekCircularSlider(
               innerWidget: (double value) {
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('الرصيد الحالي',
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      Table(
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        columnWidths: const {
-                          0: FlexColumnWidth(1.3),
-                          1: FlexColumnWidth(1),
-                        },
-                        children: [
-                          TableRow(
-                            children: [
-                              Row(
-                                textBaseline: TextBaseline.alphabetic,
-                                crossAxisAlignment: CrossAxisAlignment.baseline,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${(value * 100).toInt() % 100}',
-                                    style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Text(
-                                    '.',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '${value.toInt()}',
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('الرصيد الحالي',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${(value * 100).toInt() % 100}',
+                              style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
                               ),
-                              const Align(
-                                alignment: Alignment.centerRight,
-                                child: Padding(
-                                    padding: EdgeInsets.only(right: 8),
-                                    child: Text(
-                                      '\$',
-                                      style: TextStyle(
-                                        fontSize: 28,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                    // SvgPicture.asset(
-                                    //   'assets/images/flag-um-svgrepo-com.svg',
-                                    //   width: 20,
-                                    // ),
-                                    ),
+                            ),
+                            const Text(
+                              '.',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '${value.toInt()}',
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child: Text(
+                                '\$',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                              // SvgPicture.asset(
+                              //   'assets/images/flag-um-svgrepo-com.svg',
+                              //   width: 20,
+                              // ),
+                              ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const Text('يعادله',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Showcase(
+                      key: _one,
+                      textColor: Theme.of(context).colorScheme.onPrimary,
+                      tooltipBackgroundColor:
+                          Theme.of(context).colorScheme.primary,
+                      titleAlignment: TextAlign.center,
+                      descriptionAlignment: TextAlign.center,
+                      title: 'الرصيد التوضيحي',
+                      description:
+                          'هو المبلغ بالليرة التركية ويعادل رصيدك الحالي \$ ${fakeBalance.toInt()} ',
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            textBaseline: TextBaseline.alphabetic,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                '${(value * 100).toInt() % 100}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade600,
+                                ),
+                              ),
+                              Text(
+                                '.',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade600,
+                                ),
+                              ),
+                              Text(
+                                '${(value * 23.5).toInt()}',
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade600,
+                                ),
                               )
                             ],
                           ),
-                          const TableRow(children: [
-                              SizedBox(
-                              height: 16,
-                            ),
-                              SizedBox(
-                              height: 16,
-                            ),
-                          ]),
-                          const TableRow(
-                            children: [
-                              Text('يعادله',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 8,
-                              ),
-                            ],
-                          ),
-                          TableRow(children: [
-                            Row(
-                              textBaseline: TextBaseline.alphabetic,
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  '${(value * 100).toInt() % 100}',
-                                  style:   TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                ),
-                                  Text(
-                                  '.',
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                                padding: EdgeInsets.only(right: 8),
+                                child:
+
+                                    // SvgPicture.asset(
+                                    //   'assets/images/flag-tn-svgrepo-com.svg',
+                                    //   width: 20,
+                                    // ),
+
+                                    Text(
+                                  'LT',
                                   style: TextStyle(
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                ),
-                                Text(
-                                  '${(value * 23.5).toInt()}',
-                                  textAlign: TextAlign.end,
-                                  style:   TextStyle(
-                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey.shade600,
                                   ),
                                 )
-                              ],
-                            ),
-                              Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                  padding: EdgeInsets.only(right: 8),
-                                  child:
-
-                                  // SvgPicture.asset(
-                                  //   'assets/images/flag-tn-svgrepo-com.svg',
-                                  //   width: 20,
-                                  // ),
-
-                                 Text(
-                                   'LT',
-                                   style: TextStyle(
-                                     fontSize: 18,
-                                     fontWeight: FontWeight.bold,
-                                     color: Colors.grey.shade600,
-
-                                   ),
-                                 )
-                                  // SvgPicture.asset(
-                                  //   'assets/images/flag-tn-svgrepo-com.svg',
-                                  //   width: 20,
-                                  // ),
-                                  ),
-                            )
-                          ]),
+                                // SvgPicture.asset(
+                                //   'assets/images/flag-tn-svgrepo-com.svg',
+                                //   width: 20,
+                                // ),
+                                ),
+                          )
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
               appearance: CircularSliderAppearance(
@@ -598,10 +607,20 @@ class _HomeState extends State<Home> {
 
   Widget _drawBottomNavigationBar(BuildContext context) {
     return ConvexAppBar(
-      items: const [
+      items: [
         TabItem(icon: Icons.home_outlined, title: 'رئيسية'),
         TabItem(icon: Icons.ads_click_outlined, title: 'إعلانات'),
-        TabItem(icon: Icons.add, title: 'إضافة حساب'),
+        TabItem(
+            icon: Showcase(
+                textColor: Theme.of(context).colorScheme.onPrimary,
+                tooltipBackgroundColor:
+                Theme.of(context).colorScheme.primary,
+                titleAlignment: TextAlign.center,
+                descriptionAlignment: TextAlign.center,
+                key: _tow,
+                description: 'يمكنك إضافة حسابك الخاص من هنا',
+                child: Icon(Icons.add)),
+            title: 'إضافة حساب'),
         TabItem(icon: Icons.settings_outlined, title: 'إعدادات'),
       ],
       initialActiveIndex: 0,
