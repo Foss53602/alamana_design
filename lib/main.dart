@@ -331,6 +331,16 @@ class _HomeState extends State<Home> {
               child: SwipeButton(
                 height: 50,
                 width: 200,
+                onSwipeEnd: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height * 0.9,
+                    ),
+                    builder: (context) => PaymentPage(),
+                  );
+                },
                 thumb: Container(
                   height: 50,
                   width: 50,
@@ -601,7 +611,7 @@ class _HomeState extends State<Home> {
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnj8M1QGU9dkXVIF_9tPx5hkqzLfFg1qJSI-sIDd5Zi4v3VIymwWkBrqSMJ6aTftt0HSY&usqp=CAU',
     'دكتور اسنان':
         'https://nafezly-production.fra1.digitaloceanspaces.com/uploads/portfolios/7196_5faea70a66ba5-1605281546.jpg',
-    'متجر ':
+    'متجر العطور':
         'https://cdn.makane.com/cdn-cgi/image/quality=80,fit=scale-down,format=auto/20211229-store-nhqm/branding/logo-70727278579.jpg?height=45',
   };
 
@@ -613,8 +623,7 @@ class _HomeState extends State<Home> {
         TabItem(
             icon: Showcase(
                 textColor: Theme.of(context).colorScheme.onPrimary,
-                tooltipBackgroundColor:
-                Theme.of(context).colorScheme.primary,
+                tooltipBackgroundColor: Theme.of(context).colorScheme.primary,
                 titleAlignment: TextAlign.center,
                 descriptionAlignment: TextAlign.center,
                 key: _tow,
@@ -713,6 +722,387 @@ class _HomeState extends State<Home> {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class PaymentPage extends StatefulWidget {
+  const PaymentPage({Key? key}) : super(key: key);
+
+  @override
+  State<PaymentPage> createState() => _PaymentPageState();
+}
+
+class _PaymentPageState extends State<PaymentPage> {
+  num fakeBalance = 450;
+  num paymentAmount = 0;
+
+  bool _isDollar = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 8,
+            ),
+            const Text('تحويل جديد',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbInTajUfL2gANCy8D1raX1y91CNR4yYmxWA&usqp=CAU'),
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.storefront,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text('ميني ماركت سعيد'),
+                      ],
+                    ),
+                    const Text('الباب - الشارع الرئيسي'),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey.shade400)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.grey.shade400),
+                  ),
+                  isDense: true,
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.qr_code_outlined,
+                        size: 25, color: Theme.of(context).colorScheme.primary),
+                  ),
+                  label: const Text('الحساب الوجهة'),
+                ),
+              ),
+            ),
+            Container(
+                padding: const EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey.shade400)),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('الدفع بـ',
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        const Text('LT',
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Switch(
+                          value: _isDollar,
+                          onChanged: (value) {
+                            setState(() {
+                              _isDollar = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text('\$',
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            if (value.isEmpty) {
+                              paymentAmount = 0;
+                              return;
+                            }
+                            paymentAmount = num.parse(value);
+                          });
+                        },
+                        decoration: InputDecoration(
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(top: 11),
+                            child: Text(_isDollar ? '\$' : 'LT',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          isDense: true,
+                          label: Builder(
+                            builder: (BuildContext context) {
+                              String? text;
+                              if (!_isDollar && paymentAmount > 0) {
+                                text =
+                                    'المبلغ / يعادله بالدولار ${(paymentAmount / 23.5).toStringAsFixed(2)}';
+                              }
+                              return Text(text ?? 'المبلغ');
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 4),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey.shade400),
+                          ),
+                          isDense: true,
+                          label: Text('البيان'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    FilledButton(
+                      onPressed: ()async {
+                        // confirm payment dialog
+                        var isCorrect = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('تأكيد الدفع',
+                                    textAlign: TextAlign.center),
+                                content: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text('المبلغ'),
+                                    Text(
+                                      '${paymentAmount.toStringAsFixed(2)} ${_isDollar ? '\$' : 'LT'}',
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    const Text('الحساب الوجهة'),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'ميني ماركت سعيد',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        const Icon(Icons.store,color: Colors.grey),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context, false);
+                                      },
+                                      child: const Text('إلغاء')),
+                                  FilledButton(
+                                      onPressed: () {
+                                        Navigator.pop(context, true);
+                                        setState(() {
+                                          fakeBalance -= paymentAmount;
+                                        });
+                                      },
+                                      child: const Text('تأكيد'))
+                                ],
+                              );
+                            });
+                        if (isCorrect == true) {
+                          Navigator.pop(context);
+                          // show success dialog
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('تمت العملية بنجاح',
+                                      textAlign: TextAlign.center),
+                                  content: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                        size: 50,
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      const Text('تمت عملية الدفع بنجاح'),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        'الرصيد الحالي ${fakeBalance.toStringAsFixed(2)} \$',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                  actions: [
+                                    FilledButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('إغلاق'))
+                                  ],
+                                );
+                              });
+                        }
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).colorScheme.primary),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)))),
+                      child: const Text('تأكيد الدفع'),
+                    )
+                  ],
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('الرصيد الحالي',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(fakeBalance.toString(),
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(' \$',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(' / ',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(
+                  width: 8,
+                ),
+                Text('سيتبقى',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                    (fakeBalance -
+                            (_isDollar
+                                ? paymentAmount
+                                : (num.parse((paymentAmount / 23.5)
+                                    .toStringAsFixed(2)))))
+                        .toString(),
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(' \$',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
