@@ -1101,6 +1101,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     fontWeight: FontWeight.bold,
                   ))
             ]),
+
             Container(
                 padding: const EdgeInsets.all(8.0),
                 margin: const EdgeInsets.all(8.0),
@@ -1109,45 +1110,88 @@ class _PaymentPageState extends State<PaymentPage> {
                     border: Border.all(color: Colors.grey.shade400)),
                 child: Column(
                   children: [
+                    const SizedBox(
+                      height: 4,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('الدفع بـ',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        const SizedBox(
-                          width: 16,
+                        //tow animation controller swich between dollar and lira
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          width: 100,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: _isDollar
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                  : Theme.of(context)
+                                  .colorScheme
+                                  .outline.withOpacity(0.5) ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                _isDollar = true;
+                              });
+                            },
+                            child: Center(
+                              child: Text(
+                                'دولار \$',
+                                style: TextStyle(
+                                    color: _isDollar
+                                        ? Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary
+                                        : Theme.of(context)
+                                        .colorScheme
+                                        .surface),
+                              ),
+                            ),
+                          ),
                         ),
-                        const Text('LT',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        const SizedBox(
+                        SizedBox(
                           width: 8,
                         ),
-                        Switch(
-                          value: _isDollar,
-                          onChanged: (value) {
-                            setState(() {
-                              _isDollar = value;
-                            });
-                          },
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          width: 100,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: _isDollar
+                                  ? Theme.of(context)
+                                  .colorScheme
+                                  .outline.withOpacity(0.5)
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .secondary),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                _isDollar = false;
+                              });
+                            },
+                            child: Center(
+                              child: Text(
+                                'تركي TL',
+                                style: TextStyle(
+                                    color: _isDollar
+                                        ? Theme.of(context)
+                                        .colorScheme
+                                        .surface
+                                        : Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                              ),
+                            ),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        const Text('\$',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 8,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
