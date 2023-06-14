@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -741,13 +742,18 @@ class _HomePageState extends State<HomePage> {
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: Colors.grey.shade300),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline
+                                                .withOpacity(0.2)),
                                         clipBehavior: Clip.antiAlias,
                                         child: Icon(
                                             item.type == 0
                                                 ? Icons.storefront
                                                 : Icons.person_outline,
-                                            color: Colors.grey,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline,
                                             size: 28),
                                       ),
                                     ),
@@ -774,6 +780,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 )),
+                const SizedBox(
+                width: 8,
+                ),
               ],
             ),
             const SizedBox(
@@ -792,7 +801,13 @@ class _HomePageState extends State<HomePage> {
                   const Spacer(),
                   InkWell(
                     borderRadius: BorderRadius.circular(20),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const RecentOperationsPage(),
+                        ),
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
@@ -1239,8 +1254,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                         const SizedBox(
                                           width: 8,
                                         ),
-                                        const Icon(Icons.storefront,
-                                            color: Colors.grey),
+                                        Icon(Icons.storefront,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline),
                                       ],
                                     )
                                   ],
@@ -1416,7 +1433,9 @@ class _StoresPageState extends State<StoresPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade300, shape: BoxShape.circle),
+                    color:
+                        Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                    shape: BoxShape.circle),
                 child: const Text(
                   'الكل',
                   style: TextStyle(
@@ -1438,9 +1457,11 @@ class _StoresPageState extends State<StoresPage> {
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
+                        child: Text(
                           ' ماركت 🛒',
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                       SizedBox(
@@ -1450,7 +1471,10 @@ class _StoresPageState extends State<StoresPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .outline
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
                           'مطاعم 🍔',
@@ -1466,9 +1490,11 @@ class _StoresPageState extends State<StoresPage> {
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
+                        child: Text(
                           'عيادات سنية 🦷',
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                       SizedBox(
@@ -1478,7 +1504,10 @@ class _StoresPageState extends State<StoresPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .outline
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
                           ' ألبسة 👖',
@@ -1494,9 +1523,11 @@ class _StoresPageState extends State<StoresPage> {
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
+                        child: Text(
                           'عطورات 🌺',
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                       SizedBox(
@@ -1508,9 +1539,11 @@ class _StoresPageState extends State<StoresPage> {
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
+                        child: Text(
                           'أحذية 👠',
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                       SizedBox(
@@ -1520,7 +1553,10 @@ class _StoresPageState extends State<StoresPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .outline
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
                           ' صيدليات 💊',
@@ -1534,7 +1570,10 @@ class _StoresPageState extends State<StoresPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .outline
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
                           '  محلات ذهب 💰',
@@ -1548,7 +1587,10 @@ class _StoresPageState extends State<StoresPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .outline
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text(
                           'معارض سيارات 🚗',
@@ -1595,10 +1637,15 @@ class _StoresPageState extends State<StoresPage> {
                 : Container(
                     width: 60,
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade300, shape: BoxShape.circle),
-                    child: const Center(
-                      child:
-                          Icon(Icons.storefront, color: Colors.grey, size: 30),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .outline
+                            .withOpacity(0.2),
+                        shape: BoxShape.circle),
+                    child: Center(
+                      child: Icon(Icons.storefront,
+                          color: Theme.of(context).colorScheme.outline,
+                          size: 30),
                     ),
                   ),
             title: Text(imagesAddressesStores[index].name),
@@ -1636,6 +1683,692 @@ class _StoresPageState extends State<StoresPage> {
           );
         },
       ),
+    );
+  }
+}
+
+class RecentOperationsPage extends StatefulWidget {
+  const RecentOperationsPage({Key? key}) : super(key: key);
+
+  @override
+  State<RecentOperationsPage> createState() => _RecentOperationsPageState();
+}
+
+class _RecentOperationsPageState extends State<RecentOperationsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Row(
+              children: [
+                const Text('كشف حساب'),
+                Spacer(),
+                Image.asset('assets/images/xls.png',
+                    width: 30, height: 30 ),
+                SizedBox(width: 16,),
+                Image.asset('assets/images/pdf.png',
+                    width: 30, height: 30 ),
+              ],
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(100),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                right: 16, bottom: 8, left: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: DropdownButton(
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('2023'),
+                                  value: '2023',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('2022'),
+                                  value: '2022',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('2021'),
+                                  value: '2021',
+                                ),
+                              ],
+                              onChanged: (value) {},
+                              hint: const Text('السنة'),
+                              underline: const SizedBox(),
+                              isExpanded: true,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                left: 16, bottom: 8, right: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: DropdownButton(
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('يناير'),
+                                  value: '1',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('فبراير'),
+                                  value: '2',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('مارس'),
+                                  value: '3',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('ابريل'),
+                                  value: '4',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('مايو'),
+                                  value: '5',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('يونيو'),
+                                  value: '6',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('يوليو'),
+                                  value: '7',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('اغسطس'),
+                                  value: '8',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('سبتمبر'),
+                                  value: '9',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('اكتوبر'),
+                                  value: '10',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('نوفمبر'),
+                                  value: '11',
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('ديسمبر'),
+                                  value: '12',
+                                ),
+                              ],
+                              onChanged: (value) {},
+                              hint: const Text('الشهر'),
+                              underline: const SizedBox(),
+                              isExpanded: true,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: 'بحث',
+                          border: InputBorder.none,
+                          prefixIcon: const Icon(Icons.search)),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            centerTitle: true,
+          ),
+          body: ListView(
+            children: [
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineXY: 0,
+                isFirst: true,
+                indicatorStyle: IndicatorStyle(
+                  width: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                  padding: EdgeInsets.all(6),
+                  indicatorXY: 0,
+                ),
+                endChild: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 16),
+                      child: const Text('اليوم',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var item in imagesAddresses)
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  item.image != null
+                                      ? Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.network(
+                                              item.image.toString(),
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Icon(
+                                              item.type == 0
+                                                  ? Icons.storefront
+                                                  : Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 28),
+                                        ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(item.name),
+                                      Text(
+                                        '12:36 PM',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  const Text(
+                                    '23.24 \$',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Builder(
+                                    builder: (BuildContext context) {
+                                      var nextInt = Random().nextInt(2);
+                                      return SvgPicture.asset(
+                                        nextInt % 2 == 0
+                                            ? 'assets/images/down-svgrepo-com.svg'
+                                            : 'assets/images/up-svgrepo-com.svg',
+                                        color: nextInt % 2 == 0
+                                            ? Colors.green
+                                            : Colors.red,
+                                        height: 35,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                  ],
+                ),
+                beforeLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+                afterLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+              ),
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineXY: 0,
+                indicatorStyle: IndicatorStyle(
+                  width: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                  padding: EdgeInsets.all(6),
+                  indicatorXY: 0,
+                ),
+                endChild: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 16),
+                      child: const Text('13/6/2023',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var item in imagesAddresses.take(2))
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  item.image != null
+                                      ? Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.network(
+                                              item.image.toString(),
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Icon(
+                                              item.type == 0
+                                                  ? Icons.storefront
+                                                  : Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 28),
+                                        ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(item.name),
+                                      Text(
+                                        '12:36 PM',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  const Text(
+                                    '23.24 \$',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Builder(
+                                    builder: (BuildContext context) {
+                                      var nextInt = Random().nextInt(2);
+                                      return SvgPicture.asset(
+                                        nextInt % 2 == 0
+                                            ? 'assets/images/down-svgrepo-com.svg'
+                                            : 'assets/images/up-svgrepo-com.svg',
+                                        color: nextInt % 2 == 0
+                                            ? Colors.green
+                                            : Colors.red,
+                                        height: 35,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    )
+                  ],
+                ),
+                beforeLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+                afterLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+              ),
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineXY: 0,
+                indicatorStyle: IndicatorStyle(
+                  width: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                  padding: EdgeInsets.all(6),
+                  indicatorXY: 0,
+                ),
+                endChild: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 4, right: 16),
+                      child: Text('12/6/2023',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant)),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var item in imagesAddresses.take(2))
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  item.image != null
+                                      ? Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.network(
+                                              item.image.toString(),
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Icon(
+                                              item.type == 0
+                                                  ? Icons.storefront
+                                                  : Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 28),
+                                        ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(item.name),
+                                      Text(
+                                        '12:36 PM',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  const Text(
+                                    '23.24 \$',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Builder(
+                                    builder: (BuildContext context) {
+                                      var nextInt = Random().nextInt(2);
+                                      return SvgPicture.asset(
+                                        nextInt % 2 == 0
+                                            ? 'assets/images/down-svgrepo-com.svg'
+                                            : 'assets/images/up-svgrepo-com.svg',
+                                        color: nextInt % 2 == 0
+                                            ? Colors.green
+                                            : Colors.red,
+                                        height: 35,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    )
+                  ],
+                ),
+                beforeLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+                afterLineStyle: LineStyle(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+              ),
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineXY: 0,
+                isLast: true,
+                indicatorStyle: IndicatorStyle(
+                  width: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                  padding: EdgeInsets.all(6),
+                  indicatorXY: 0,
+                ),
+                endChild: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 16),
+                      child: const Text('11/6/2023',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        for (var item in imagesAddresses.reversed.take(4))
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  item.image != null
+                                      ? Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.network(
+                                              item.image.toString(),
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Icon(
+                                              item.type == 0
+                                                  ? Icons.storefront
+                                                  : Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 28),
+                                        ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(item.name),
+                                      Text(
+                                        '12:36 PM',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  const Text(
+                                    '23.24 \$',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Builder(
+                                    builder: (BuildContext context) {
+                                      var nextInt = Random().nextInt(2);
+                                      return SvgPicture.asset(
+                                        nextInt % 2 == 0
+                                            ? 'assets/images/down-svgrepo-com.svg'
+                                            : 'assets/images/up-svgrepo-com.svg',
+                                        color: nextInt % 2 == 0
+                                            ? Colors.green
+                                            : Colors.red,
+                                        height: 35,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
