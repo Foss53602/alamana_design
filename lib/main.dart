@@ -236,9 +236,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       },
       children: [
         const HomePage(),
-        Container(
-          child: Center(child: Text('ads page')),
-        ),
+        const AdsPage(),
         const StoresPage(),
         Container(
           child: Center(child: Text('settings page')),
@@ -781,7 +779,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )),
                 const SizedBox(
-                width: 8,
+                  width: 8,
                 ),
               ],
             ),
@@ -1124,12 +1122,11 @@ class _PaymentPageState extends State<PaymentPage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: _isDollar
-                                  ? Theme.of(context)
-                                      .colorScheme
-                                      .secondary
+                                  ? Theme.of(context).colorScheme.secondary
                                   : Theme.of(context)
-                                  .colorScheme
-                                  .outline.withOpacity(0.5) ),
+                                      .colorScheme
+                                      .outline
+                                      .withOpacity(0.5)),
                           child: InkWell(
                             onTap: () {
                               setState(() {
@@ -1142,11 +1139,11 @@ class _PaymentPageState extends State<PaymentPage> {
                                 style: TextStyle(
                                     color: _isDollar
                                         ? Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary
+                                            .colorScheme
+                                            .onSecondary
                                         : Theme.of(context)
-                                        .colorScheme
-                                        .surface),
+                                            .colorScheme
+                                            .surface),
                               ),
                             ),
                           ),
@@ -1162,11 +1159,10 @@ class _PaymentPageState extends State<PaymentPage> {
                               borderRadius: BorderRadius.circular(10),
                               color: _isDollar
                                   ? Theme.of(context)
-                                  .colorScheme
-                                  .outline.withOpacity(0.5)
-                                  : Theme.of(context)
                                       .colorScheme
-                                      .secondary),
+                                      .outline
+                                      .withOpacity(0.5)
+                                  : Theme.of(context).colorScheme.secondary),
                           child: InkWell(
                             onTap: () {
                               setState(() {
@@ -1178,12 +1174,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                 'تركي TL',
                                 style: TextStyle(
                                     color: _isDollar
-                                        ? Theme.of(context)
-                                        .colorScheme
-                                        .surface
+                                        ? Theme.of(context).colorScheme.surface
                                         : Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                            .colorScheme
+                                            .onSecondary),
                               ),
                             ),
                           ),
@@ -1749,11 +1743,11 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
               children: [
                 const Text('كشف حساب'),
                 Spacer(),
-                Image.asset('assets/images/xls.png',
-                    width: 30, height: 30 ),
-                SizedBox(width: 16,),
-                Image.asset('assets/images/pdf.png',
-                    width: 30, height: 30 ),
+                Image.asset('assets/images/xls.png', width: 30, height: 30),
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset('assets/images/pdf.png', width: 30, height: 30),
               ],
             ),
             bottom: PreferredSize(
@@ -2416,3 +2410,232 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
     );
   }
 }
+
+class AdsPage extends StatefulWidget {
+  const AdsPage({Key? key}) : super(key: key);
+
+  @override
+  State<AdsPage> createState() => _AdsPageState();
+}
+
+class _AdsPageState extends State<AdsPage> {
+  List<String> adsImages = [
+    'assets/images/ad1.jpg',
+    'assets/images/ad2.jpg',
+    'assets/images/ad3.jpg',
+    'assets/images/ad4.jpg',
+    'assets/images/ad5.jpg',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: adsImages.length,
+          itemBuilder: (BuildContext context, int index) {
+            //هذا التصميم الثاني لبطاقة الإعلات بحالة انت الصورة ابعادها 1.7 اي 16/9
+            return AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                elevation: 0,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      adsImages[index],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                    //favorite, share,show count,read more in bottom
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 4),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.1),
+                                Colors.black.withOpacity(0.8),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/share-forward-svgrepo-com.svg',
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  height: 20,
+                                ),
+                                Spacer(),
+                                //read more
+                                Text(
+                                  'قراءة المزيد',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Spacer(),
+                                Text(
+                                  '24',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Icon(
+                                    index % 2 == 0
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    size: 20),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Text(
+                                  '12',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                SvgPicture.asset(
+                                  'assets/images/eye-svgrepo-com.svg',
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                          )),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
+  }
+}
+
+
+// هذا التصميم الأول لبطاقة الإعلات بحالة انت الصورة ابعادها 2.5 ولم يتم التعديل عليها
+// return Card(
+// clipBehavior: Clip.antiAlias,
+// elevation: 0,
+// color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+// margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+// shape: RoundedRectangleBorder(
+// borderRadius: BorderRadius.circular(20),
+// ),
+// child: SizedBox(
+// height: 200,
+// child: Column(
+// children: [
+// Expanded(
+// child: Image.asset(
+// adsImages[index],
+// fit: BoxFit.cover,
+// width: double.infinity,
+// ),
+// ),
+// Padding(
+// padding: const EdgeInsets.symmetric(
+// horizontal: 16, vertical: 8),
+// child: Row(
+// children: [
+// SvgPicture.asset(
+// 'assets/images/share-forward-svgrepo-com.svg',
+// color:
+// Theme.of(context).colorScheme.onSurfaceVariant,
+// height: 20,
+// ),
+// Spacer(),
+// TextButton(
+// onPressed: () {},
+// child: Text(
+// 'قراءة المزيد',
+// ),
+// style: TextButton.styleFrom(
+// padding: EdgeInsets.zero,
+// minimumSize: Size(0, 0),
+// tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+// )),
+// Spacer(),
+// Text(
+// '24',
+// style: TextStyle(
+// color: Theme.of(context)
+//     .colorScheme
+//     .onSurfaceVariant,
+// fontSize: 12,
+// fontWeight: FontWeight.bold),
+// ),
+// const SizedBox(
+// width: 8,
+// ),
+// Icon(
+// index % 2 == 0
+// ? Icons.favorite
+//     : Icons.favorite_border,
+// color:  index % 2 == 0 ? Colors.red : Theme.of(context)
+//     .colorScheme
+//     .onSurfaceVariant,
+// size: 20),
+// const SizedBox(
+// width: 16,
+// ),
+// Text(
+// '12',
+// style: TextStyle(
+// color: Theme.of(context)
+//     .colorScheme
+//     .onSurfaceVariant,
+// fontSize: 12,
+// fontWeight: FontWeight.bold),
+// ),
+// const SizedBox(
+// width: 8,
+// ),
+// SvgPicture.asset(
+// 'assets/images/eye-svgrepo-com.svg',
+// color:
+// Theme.of(context).colorScheme.onSurfaceVariant,
+// height: 20,
+// ),
+// ],
+// ),
+// )
+// ],
+// ),
+// ),
+// );
