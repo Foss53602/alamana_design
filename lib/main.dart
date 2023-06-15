@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:alamana_design/color_schemes.g.dart';
 import 'package:alamana_design/theqa_color_schemes.g.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -181,8 +182,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           const Spacer(),
           Image.asset(
-            'assets/images/theqa_app_bar.png',
-            width: 120,
+            'assets/images/logo_appBar.png',
+            color: Theme.of(context).colorScheme.primary,
+            width: 110,
           ),
           const Spacer(),
         ],
@@ -236,9 +238,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         }
       },
       children: [
-          HomePage(),
-          AdsPage(),
-          StoresPage(),
+        HomePage(),
+        AdsPage(),
+        StoresPage(),
         Container(
           child: Center(child: Text('settings page')),
         ),
@@ -2647,7 +2649,8 @@ class _DisplayTransferMoneyDialogState
       child: Dialog(
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
-            : Theme.of(context).colorScheme.background,
+            : Theme.of(context).colorScheme.surfaceVariant,
+        elevation: 0,
         insetPadding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
@@ -2695,12 +2698,11 @@ class _DisplayTransferMoneyDialogState
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Image.asset(
-                      Theme.of(context).brightness == Brightness.light
-                          ? 'assets/images/theqa_app_bar.png'
-                          : 'assets/images/logo_appBar1.png',
-                      height: Theme.of(context).brightness == Brightness.light
-                          ? 35
-                          : 58,
+                      'assets/images/logo_appBar.png',
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onBackground,
+                      height: 45,
                     ),
                   ),
                 ],
@@ -2708,6 +2710,7 @@ class _DisplayTransferMoneyDialogState
               Divider(
                 height: 8,
                 thickness: 1,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
               ),
               // المبلغ المحول, تفقيط
               Container(
