@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:alamana_design/color_schemes.g.dart';
-import 'package:alamana_design/theqa_color_schemes.g.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
@@ -14,7 +13,6 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 ValueNotifier<ThemeMode> themeModeNotifier =
     ValueNotifier<ThemeMode>(ThemeMode.light);
@@ -241,9 +239,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         HomePage(),
         AdsPage(),
         StoresPage(),
-        Container(
-          child: Center(child: Text('settings page')),
-        ),
+        SettingsPage(),
       ],
     );
   }
@@ -2980,6 +2976,585 @@ class _DisplayTransferMoneyDialogState
           ),
         ),
       ),
+    );
+  }
+}
+
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+          body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ListView(
+          //sessions list (user info, language, notifications, dark mode, logout)
+          children: [
+            Text('الإشتراكات',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+            Text(
+                'نص يناسب قسم الإشتراكات بحيث يكون وجيز ولا يتجاوز سطرين ولا يتجاوز سطرين',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.outline,
+                )),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Column(
+                children: [
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerColor: Colors.transparent,
+                    ),
+                    child: ExpansionTile(
+                        childrenPadding: EdgeInsets.all(8),
+                        title: Text('الإشتراك الحالي',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                child: Text('الأساسية',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ],
+                        ),
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text('تاريخ البداية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text('16/12/2022',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('تاريخ النهاية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text('30/6/2023',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('المدة المتبقية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  const Text('13 يوم',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.2),
+                            height: 24,
+                            thickness: 0.2,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 8, right: 8, left: 8),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Row(children: [
+                                    Text('الحد الأعلى للرصيد',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('150 \$',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                  Row(children: [
+                                    Text('الحد الأعلى للحوالات الخارجية',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('50 \$',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                  Row(children: [
+                                    Text('عدد الإعلانات المسموح بها',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('0 إعلان',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                ],
+                              ),
+                            ),
+                          )
+                        ]),
+                  ),
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerColor: Colors.transparent,
+                    ),
+                    child: ExpansionTile(
+                        childrenPadding: EdgeInsets.all(8),
+                        title: const Text('الإشتراك المستقبلي',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                child: Text('VIP',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ],
+                        ),
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text('تاريخ البداية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text('16/11/2022',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('تاريخ النهاية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text('30/12/2023',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('المدة المتبقية',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      )),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  const Text('6 أشهر و 5 يوم',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.2),
+                            height: 24,
+                            thickness: 0.2,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 8, right: 8, left: 8),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Row(children: [
+                                    Text('الحد الأعلى للرصيد',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('820 \$',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                  Row(children: [
+                                    Text('الحد الأعلى للحوالات الخارجية',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('200 \$',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                  Row(children: [
+                                    Text('عدد الإعلانات المسموح بها',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        )),
+                                    Spacer(),
+                                    Text('1 إعلان',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ]),
+                                ],
+                              ),
+                            ),
+                          )
+                        ]),
+                  ),
+                  ListTile(
+                    title: Text('تمديد اشتراك باقة'),
+                    leading: Icon(
+                      Icons.replay_outlined,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('تعديل شريحة الإشتراك'),
+                    leading: Icon(
+                      Icons.credit_card_outlined,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text('الحساب',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+            Text('نص يناسب قسم الحساب بحيث يكون وجيز ولا يتجاوز سطرين',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.outline,
+                )),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text('تغيير كلمة المرور'),
+                      leading: Icon(
+                        Icons.lock_outline,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('تأكيد التحويل بواسطة'),
+                      leading: Icon(
+                        Icons.verified_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.fingerprint_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                          ),
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('مدة الجلسة'),
+                      leading: Icon(
+                        Icons.timer_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('قنوات الإشعارات'),
+                      leading: Icon(
+                        Icons.notifications_none_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('الأجهزة المرتبطة'),
+                      leading: Icon(
+                        Icons.phone_android_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                  ],
+                )),
+            const SizedBox(
+              height: 16,
+            ),
+            Text('الدفع بدون انترنت',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+            Text('نص يناسب قسم الدفع بدون انترنت بحيث يكون وجيز ولا يتجاوز سطرين سطرين',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.outline,
+                )),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text('توليد باركود جديد'),
+                      leading: Icon(
+                        Icons.qr_code_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('استعراض الباركود'),
+                      leading: Icon(
+                        Icons.qr_code_scanner_outlined,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                      ),
+                    ),
+                  ],
+                )),
+          ],
+        ),
+      )),
     );
   }
 }
