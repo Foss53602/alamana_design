@@ -236,9 +236,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         }
       },
       children: [
-        const HomePage(),
-        const AdsPage(),
-        const StoresPage(),
+          HomePage(),
+          AdsPage(),
+          StoresPage(),
         Container(
           child: Center(child: Text('settings page')),
         ),
@@ -630,7 +630,7 @@ class _HomePageState extends State<HomePage> {
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.w600,
-                            fontSize: 10,
+                            fontSize: 11,
                           )),
                     ),
                   ),
@@ -810,12 +810,12 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
-                      child: Text('عرض الكل',
+                      child: Text('عرض السجل',
                           style: TextStyle(
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.w600,
-                            fontSize: 10,
+                            fontSize: 11,
                           )),
                     ),
                   ),
@@ -825,96 +825,110 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 for (int i = 0; i < 3; i++)
-                  Card(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    elevation: 0,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Row(
-                        children: [
-                          imagesAddresses.reversed.toList()[i].image != null
-                              ? Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 2),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  clipBehavior: Clip.antiAlias,
-                                  height: 50,
-                                  width: 50,
-                                  child: Image.network(
-                                      imagesAddresses.reversed
-                                          .toList()[i]
-                                          .image
-                                          .toString(),
-                                      fit: BoxFit.cover),
-                                )
-                              : Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 2),
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return DisplayTransferMoneyDialog(
+                              transferMoney:
+                                  imagesAddresses.reversed.toList()[i],
+                            );
+                          });
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Row(
+                          children: [
+                            imagesAddresses.reversed.toList()[i].image != null
+                                ? Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 2),
+                                    decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
+                                    ),
+                                    clipBehavior: Clip.antiAlias,
+                                    height: 50,
+                                    width: 50,
+                                    child: Image.network(
+                                        imagesAddresses.reversed
+                                            .toList()[i]
+                                            .image
+                                            .toString(),
+                                        fit: BoxFit.cover),
+                                  )
+                                : Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 2),
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.1)),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Icon(
+                                        imagesAddresses.reversed
+                                                    .toList()[i]
+                                                    .type ==
+                                                0
+                                            ? Icons.storefront
+                                            : Icons.person_outline,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withOpacity(0.8),
+                                        size: 28),
+                                  ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(imagesAddresses.reversed.toList()[i].name),
+                                Text(
+                                  '10/6/2023 10:30',
+                                  style: TextStyle(
+                                      fontSize: 12,
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .primary
-                                          .withOpacity(0.1)),
-                                  clipBehavior: Clip.antiAlias,
-                                  child: Icon(
-                                      imagesAddresses.reversed
-                                                  .toList()[i]
-                                                  .type ==
-                                              0
-                                          ? Icons.storefront
-                                          : Icons.person_outline,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.8),
-                                      size: 28),
+                                          .onSurfaceVariant),
                                 ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(imagesAddresses.reversed.toList()[i].name),
-                              Text(
-                                '10/6/2023 10:30',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Text(
-                            '23.24 \$',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          SvgPicture.asset(
-                            i % 2 == 0
-                                ? 'assets/images/down-svgrepo-com.svg'
-                                : 'assets/images/up-svgrepo-com.svg',
-                            color: i % 2 == 0 ? Colors.green : Colors.red,
-                            height: 35,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          )
-                        ],
+                              ],
+                            ),
+                            const Spacer(),
+                            const Text(
+                              '23.24 \$',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            SvgPicture.asset(
+                              i % 2 == 0
+                                  ? 'assets/images/down-svgrepo-com.svg'
+                                  : 'assets/images/up-svgrepo-com.svg',
+                              color: i % 2 == 0 ? Colors.green : Colors.red,
+                              height: 35,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
@@ -1117,14 +1131,15 @@ class _PaymentPageState extends State<PaymentPage> {
                       cornerRadius: 20.0,
                       activeBgColors: [
                         [Theme.of(context).colorScheme.primary],
-                        [Theme.of(context).colorScheme.secondary]
+                        [Theme.of(context).colorScheme.primary]
                       ],
                       activeFgColor: Theme.of(context).colorScheme.onSecondary,
-                      inactiveBgColor: Theme.of(context).colorScheme.outlineVariant,
+                      inactiveBgColor:
+                          Theme.of(context).colorScheme.outlineVariant,
                       inactiveFgColor: Theme.of(context).colorScheme.outline,
-                      initialLabelIndex:  _isDollar ? 0 : 1,
-                      totalSwitches:  2,
-                      labels: [ 'دولار  \$', 'تركي  TL'],
+                      initialLabelIndex: _isDollar ? 0 : 1,
+                      totalSwitches: 2,
+                      labels: ['دولار  \$', 'تركي  TL'],
                       radiusStyle: true,
                       onToggle: (index) {
                         setState(() {
@@ -1175,18 +1190,23 @@ class _PaymentPageState extends State<PaymentPage> {
                                 return Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text('المبلغ / يعادله بالدولار ' ),
-                                    Text('${(paymentAmount / 23.5).toStringAsFixed(2)}',
+                                    Text('المبلغ / يعادله بالدولار '),
+                                    Text(
+                                        '${(paymentAmount / 23.5).toStringAsFixed(2)}',
                                         style: TextStyle(
                                           fontSize: 18,
-                                          color: Theme.of(context).colorScheme.primary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                           fontWeight: FontWeight.bold,
                                         )),
                                     Text(' بسعر صرف '),
                                     Text('23.5',
                                         style: TextStyle(
                                           fontSize: 18,
-                                          color: Theme.of(context).colorScheme.primary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                           fontWeight: FontWeight.bold,
                                         )),
                                   ],
@@ -2398,110 +2418,93 @@ class _AdsPageState extends State<AdsPage> {
       body: ListView.builder(
           itemCount: adsImages.length,
           itemBuilder: (BuildContext context, int index) {
-            //هذا التصميم الثاني لبطاقة الإعلات بحالة انت الصورة ابعادها 1.7 اي 16/9
-            return AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                elevation: 0,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Stack(
+            return Card(
+              clipBehavior: Clip.antiAlias,
+              elevation: 0,
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: SizedBox(
+                height: 200,
+                child: Column(
                   children: [
-                    Image.asset(
-                      adsImages[index],
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
+                    Expanded(
+                      child: Image.asset(
+                        adsImages[index],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     ),
-                    //favorite, share,show count,read more in bottom
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4, vertical: 4),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.black.withOpacity(0.1),
-                                Colors.black.withOpacity(0.8),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/share-forward-svgrepo-com.svg',
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                            height: 20,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/share-forward-svgrepo-com.svg',
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  height: 20,
-                                ),
-                                Spacer(),
-                                //read more
-                                Text(
-                                  'قراءة المزيد',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '24',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Icon(
-                                    index % 2 == 0
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
-                                    size: 20),
-                                const SizedBox(
-                                  width: 16,
-                                ),
-                                Text(
-                                  '12',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                SvgPicture.asset(
-                                  'assets/images/eye-svgrepo-com.svg',
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                          )),
+                          Spacer(),
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'قراءة المزيد...',
+                              ),
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size(0, 0),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              )),
+                          Spacer(),
+                          Text(
+                            '24',
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Icon(
+                              index % 2 == 0
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: index % 2 == 0
+                                  ? Colors.red
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                              size: 20),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            '12',
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          SvgPicture.asset(
+                            'assets/images/eye-svgrepo-com.svg',
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -2512,9 +2515,10 @@ class _AdsPageState extends State<AdsPage> {
   }
 }
 
-
-// هذا التصميم الأول لبطاقة الإعلات بحالة انت الصورة ابعادها 2.5 ولم يتم التعديل عليها
-// return Card(
+//
+// return AspectRatio(
+// aspectRatio: 16 / 9,
+// child: Card(
 // clipBehavior: Clip.antiAlias,
 // elevation: 0,
 // color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
@@ -2522,18 +2526,34 @@ class _AdsPageState extends State<AdsPage> {
 // shape: RoundedRectangleBorder(
 // borderRadius: BorderRadius.circular(20),
 // ),
-// child: SizedBox(
-// height: 200,
-// child: Column(
+// child: Stack(
 // children: [
-// Expanded(
-// child: Image.asset(
+// Image.asset(
 // adsImages[index],
 // fit: BoxFit.cover,
 // width: double.infinity,
+// height: double.infinity,
+// ),
+// //favorite, share,show count,read more in bottom
+// Positioned(
+// bottom: 0,
+// left: 0,
+// right: 0,
+// child: Container(
+// padding: const EdgeInsets.symmetric(
+// horizontal: 4, vertical: 4),
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(20),
+// gradient: LinearGradient(
+// colors: [
+// Colors.black.withOpacity(0.1),
+// Colors.black.withOpacity(0.8),
+// ],
+// begin: Alignment.topCenter,
+// end: Alignment.bottomCenter,
 // ),
 // ),
-// Padding(
+// child: Padding(
 // padding: const EdgeInsets.symmetric(
 // horizontal: 16, vertical: 8),
 // child: Row(
@@ -2541,27 +2561,27 @@ class _AdsPageState extends State<AdsPage> {
 // SvgPicture.asset(
 // 'assets/images/share-forward-svgrepo-com.svg',
 // color:
-// Theme.of(context).colorScheme.onSurfaceVariant,
+// Theme.of(context).colorScheme.onPrimary,
 // height: 20,
 // ),
 // Spacer(),
-// TextButton(
-// onPressed: () {},
-// child: Text(
+// //read more
+// Text(
 // 'قراءة المزيد',
+// style: TextStyle(
+// color: Theme.of(context)
+//     .colorScheme
+//     .onPrimary,
+// fontSize: 12,
+// fontWeight: FontWeight.bold),
 // ),
-// style: TextButton.styleFrom(
-// padding: EdgeInsets.zero,
-// minimumSize: Size(0, 0),
-// tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-// )),
 // Spacer(),
 // Text(
 // '24',
 // style: TextStyle(
 // color: Theme.of(context)
 //     .colorScheme
-//     .onSurfaceVariant,
+//     .onPrimary,
 // fontSize: 12,
 // fontWeight: FontWeight.bold),
 // ),
@@ -2572,9 +2592,8 @@ class _AdsPageState extends State<AdsPage> {
 // index % 2 == 0
 // ? Icons.favorite
 //     : Icons.favorite_border,
-// color:  index % 2 == 0 ? Colors.red : Theme.of(context)
-//     .colorScheme
-//     .onSurfaceVariant,
+// color:
+// Theme.of(context).colorScheme.onPrimary,
 // size: 20),
 // const SizedBox(
 // width: 16,
@@ -2584,7 +2603,7 @@ class _AdsPageState extends State<AdsPage> {
 // style: TextStyle(
 // color: Theme.of(context)
 //     .colorScheme
-//     .onSurfaceVariant,
+//     .onPrimary,
 // fontSize: 12,
 // fontWeight: FontWeight.bold),
 // ),
@@ -2594,13 +2613,370 @@ class _AdsPageState extends State<AdsPage> {
 // SvgPicture.asset(
 // 'assets/images/eye-svgrepo-com.svg',
 // color:
-// Theme.of(context).colorScheme.onSurfaceVariant,
+// Theme.of(context).colorScheme.onPrimary,
 // height: 20,
 // ),
 // ],
 // ),
+// )),
 // )
 // ],
 // ),
 // ),
 // );
+
+class DisplayTransferMoneyDialog extends StatefulWidget {
+  final Store transferMoney;
+
+  const DisplayTransferMoneyDialog({Key? key, required this.transferMoney})
+      : super(key: key);
+
+  @override
+  State<DisplayTransferMoneyDialog> createState() =>
+      _DisplayTransferMoneyDialogState();
+}
+
+class _DisplayTransferMoneyDialogState
+    extends State<DisplayTransferMoneyDialog> {
+  bool _isAddedToFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Dialog(
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Theme.of(context).colorScheme.background,
+        insetPadding: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'إشعار تحويل',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        'رقم: 156789',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text('15/6/2023 12:36 PM',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Image.asset(
+                      Theme.of(context).brightness == Brightness.light
+                          ? 'assets/images/theqa_app_bar.png'
+                          : 'assets/images/logo_appBar1.png',
+                      height: Theme.of(context).brightness == Brightness.light
+                          ? 35
+                          : 58,
+                    ),
+                  ),
+                ],
+              ),
+              Divider(
+                height: 8,
+                thickness: 1,
+              ),
+              // المبلغ المحول, تفقيط
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'المبلغ',
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '273 \$',
+                            style: TextStyle(
+                                fontSize: 30,
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'مئتان وثلاثة وسبعون دولاراً أمريكياً فقط',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 4),
+                          child: Text(
+                            'المرسل',
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                                radius: 25,
+                                backgroundImage:
+                                    NetworkImage(imagesAddresses.first.image!)),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'محمد عبد الله',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14),
+                                ),
+                                Text(
+                                  'بن سعيد',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  'الباب',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 2),
+                          child: Text(
+                            'المستقبل',
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 25,
+                              child: widget.transferMoney != null
+                                  ? widget.transferMoney.image == null
+                                      ? widget.transferMoney.type == 0
+                                          ? Icon(
+                                              Icons.storefront,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 40,
+                                            )
+                                          : Icon(
+                                              Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 40,
+                                            )
+                                      : null
+                                  : Icon(
+                                      Icons.storefront,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.8),
+                                      size: 40,
+                                    ),
+                              backgroundImage: widget.transferMoney.image !=
+                                      null
+                                  ? NetworkImage(widget.transferMoney.image!)
+                                  : null,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  widget.transferMoney.name,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  widget.transferMoney.type == 1
+                                      ? 'حساب شخصي'
+                                      : 'اعزاز',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'البيان',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'تحويل مبلغ 273\$ لمحمد عبدالله من حسابي الشخصي',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Image.asset(
+                          'assets/images/share_transfer.png',
+                          width: 30,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        )),
+                    Spacer(),
+                    IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          'assets/images/pdf-file-svgrepo-com.svg',
+                          width: 25,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        )),
+                    Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isAddedToFavorite = !_isAddedToFavorite;
+                          });
+                        },
+                        icon: _isAddedToFavorite
+                            ? Icon(Icons.favorite, size: 30, color: Colors.red)
+                            : Image.asset(
+                                'assets/images/add_to_favorite.png',
+                                width: 33,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              )),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
