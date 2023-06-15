@@ -43,6 +43,7 @@ dependencies:
   showcaseview: ^2.0.3
   url_launcher: ^6.1.11
   timeline_tile: ^2.0.0
+  toggle_switch: ^2.1.0
 
 
 dev_dependencies:

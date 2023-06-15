@@ -11,6 +11,7 @@ import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -1111,78 +1112,25 @@ class _PaymentPageState extends State<PaymentPage> {
                     const SizedBox(
                       height: 4,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //tow animation controller swich between dollar and lira
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          width: 100,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: _isDollar
-                                  ? Theme.of(context).colorScheme.secondary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .outline
-                                      .withOpacity(0.5)),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                _isDollar = true;
-                              });
-                            },
-                            child: Center(
-                              child: Text(
-                                'دولار \$',
-                                style: TextStyle(
-                                    color: _isDollar
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .onSecondary
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .surface),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          width: 100,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: _isDollar
-                                  ? Theme.of(context)
-                                      .colorScheme
-                                      .outline
-                                      .withOpacity(0.5)
-                                  : Theme.of(context).colorScheme.secondary),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                _isDollar = false;
-                              });
-                            },
-                            child: Center(
-                              child: Text(
-                                'تركي TL',
-                                style: TextStyle(
-                                    color: _isDollar
-                                        ? Theme.of(context).colorScheme.surface
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .onSecondary),
-                              ),
-                            ),
-                          ),
-                        ),
+                    ToggleSwitch(
+                      minWidth: 100.0,
+                      cornerRadius: 20.0,
+                      activeBgColors: [
+                        [Theme.of(context).colorScheme.primary],
+                        [Theme.of(context).colorScheme.secondary]
                       ],
+                      activeFgColor: Theme.of(context).colorScheme.onSecondary,
+                      inactiveBgColor: Theme.of(context).colorScheme.outlineVariant,
+                      inactiveFgColor: Theme.of(context).colorScheme.outline,
+                      initialLabelIndex:  _isDollar ? 0 : 1,
+                      totalSwitches:  2,
+                      labels: [ 'دولار  \$', 'تركي  TL'],
+                      radiusStyle: true,
+                      onToggle: (index) {
+                        setState(() {
+                          _isDollar = !_isDollar;
+                        });
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -1203,7 +1151,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         decoration: InputDecoration(
                           suffixIcon: Padding(
                             padding: const EdgeInsets.only(top: 11),
-                            child: Text(_isDollar ? '\$' : 'LT',
+                            child: Text(_isDollar ? '\$' : 'TL',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18,
@@ -1224,8 +1172,25 @@ class _PaymentPageState extends State<PaymentPage> {
                             builder: (BuildContext context) {
                               String? text;
                               if (!_isDollar && paymentAmount > 0) {
-                                text =
-                                    'المبلغ / يعادله بالدولار ${(paymentAmount / 23.5).toStringAsFixed(2)}';
+                                return Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('المبلغ / يعادله بالدولار ' ),
+                                    Text('${(paymentAmount / 23.5).toStringAsFixed(2)}',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Theme.of(context).colorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Text(' بسعر صرف '),
+                                    Text('23.5',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Theme.of(context).colorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ],
+                                );
                               }
                               return Text(text ?? 'المبلغ');
                             },
