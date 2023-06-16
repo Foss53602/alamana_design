@@ -313,9 +313,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
                 const Divider(),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return _qrCodeWidget();
+                        });
+                  },
                   leading: const Icon(Icons.qr_code_outlined),
-                  title: const Text('المحفظة'),
+                  title: const Text('رمز حسابك'),
                 ),
                 ListTile(
                   onTap: () {},
@@ -355,6 +361,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('الإعدادات'),
                 ),
+                ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  leading: const Icon(Icons.login_outlined),
+                  title: const Text('تسجيل الدخول'),
+                ),
               ],
             ),
           ),
@@ -382,7 +396,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       insetPadding: const EdgeInsets.all(16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding:   EdgeInsets.symmetric(horizontal: 36 ),
+        padding: EdgeInsets.symmetric(horizontal: 36),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -391,13 +405,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               height: 20,
             ),
             Text(
-              'الكود الخاص بك',
+              'الرمز الخاص بحسابك',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 36,
             ),
-            SizedBox(width: 270,),
+            SizedBox(
+              width: 270,
+            ),
             Stack(
               alignment: Alignment.center,
               children: [
@@ -415,7 +431,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   height: 272,
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: Theme.of(context).brightness == Brightness.light
+                          color: Theme.of(context).brightness ==
+                                  Brightness.light
                               ? Colors.white
                               : Theme.of(context).colorScheme.surfaceVariant,
                           width: 10)),
@@ -425,23 +442,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   height: 150,
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: Theme.of(context).brightness == Brightness.light
+                          color: Theme.of(context).brightness ==
+                                  Brightness.light
                               ? Colors.white
                               : Theme.of(context).colorScheme.surfaceVariant,
                           width: 10)),
                 ),
                 QrImage(
-                    data: '003348437001',
-                    version: QrVersions.auto,
-                    size: 220.0,
-                    eyeStyle: QrEyeStyle(
-                      eyeShape: QrEyeShape.circle,
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-                    dataModuleStyle: QrDataModuleStyle(
-                      dataModuleShape: QrDataModuleShape.circle,
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ) ,
+                  data: '003348437001',
+                  version: QrVersions.auto,
+                  size: 220.0,
+                  eyeStyle: QrEyeStyle(
+                    eyeShape: QrEyeShape.circle,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  dataModuleStyle: QrDataModuleStyle(
+                    dataModuleShape: QrDataModuleShape.circle,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
               ],
             ),
@@ -3786,6 +3804,174 @@ class _NotificationsPageState extends State<NotificationsPage> {
                       )),
                 ));
           },
+        ),
+      ),
+    );
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var _isEmail = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('تسجيل الدخول'),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              // color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            margin: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 64,
+                ),
+                Image.asset(
+                  'assets/images/logo_with_color.png',
+                  height: 110,
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Text(
+                  'تسجيل الدخول',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                ToggleSwitch(
+                  minWidth: 120.0,
+                  cornerRadius: 20.0,
+                  activeBgColors: [
+                    [Theme.of(context).colorScheme.primary],
+                    [Theme.of(context).colorScheme.primary]
+                  ],
+                  activeFgColor: Theme.of(context).colorScheme.onSecondary,
+                  inactiveBgColor: Theme.of(context)
+                      .colorScheme
+                      .outlineVariant
+                      .withOpacity(0.5),
+                  inactiveFgColor: Theme.of(context).colorScheme.outline,
+                  initialLabelIndex: _isEmail ? 0 : 1,
+                  totalSwitches: 2,
+                  labels: ['البريد الإلكتروني', 'رقم الهاتف'],
+                  radiusStyle: true,
+                  onToggle: (index) {
+                    setState(() {
+                      _isEmail = !_isEmail;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: _isEmail ? 'البريد الإلكتروني' : 'رقم الهاتف',
+                        isDense: true,
+                        prefixIcon: Icon(
+                          _isEmail
+                              ? Icons.email_outlined
+                              : Icons.phone_outlined,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'كلمة المرور',
+                        isDense: true,
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        suffixIcon: Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CheckboxListTile(
+                      value: true,
+                      onChanged: (c) {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      dense: true,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      title: Text(
+                        'تذكرني',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                    ),
+                  ]),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                  //login button
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'تسجيل الدخول',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                const SizedBox(
+                  height: 32,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
