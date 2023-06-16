@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -189,7 +190,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return _qrCodeWidget();
+                });
+          },
           icon: SvgPicture.asset(
             'assets/images/qr-code-svgrepo-com.svg',
             height: 20,
@@ -362,6 +369,116 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ],
           )
         ],
+      ),
+    );
+  }
+
+  Widget _qrCodeWidget() {
+    return Dialog(
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? Colors.white
+          : Theme.of(context).colorScheme.surfaceVariant,
+      elevation: 0,
+      insetPadding: const EdgeInsets.all(16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding:   EdgeInsets.symmetric(horizontal: 36 ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'الكود الخاص بك',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 36,
+            ),
+            SizedBox(width: 270,),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 270,
+                  height: 270,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 8)),
+                ),
+                Container(
+                  width: 150,
+                  height: 272,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.surfaceVariant,
+                          width: 10)),
+                ),
+                Container(
+                  width: 272,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.surfaceVariant,
+                          width: 10)),
+                ),
+                QrImage(
+                    data: '003348437001',
+                    version: QrVersions.auto,
+                    size: 220.0,
+                    eyeStyle: QrEyeStyle(
+                      eyeShape: QrEyeShape.circle,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    dataModuleStyle: QrDataModuleStyle(
+                      dataModuleShape: QrDataModuleShape.circle,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ) ,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              '003348437001',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FilledButton(
+              onPressed: () {},
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'مشاركة',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Icon(
+                    Icons.share_outlined,
+                    size: 20,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
