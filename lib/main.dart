@@ -199,7 +199,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         Stack(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationsPage(),
+                  ),
+                );
+              },
               icon: const Icon(Icons.notifications_none_outlined),
             ),
             Positioned(
@@ -3512,7 +3519,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold)),
-            Text('نص يناسب قسم الدفع بدون انترنت بحيث يكون وجيز ولا يتجاوز سطرين سطرين',
+            Text(
+                'نص يناسب قسم الدفع بدون انترنت بحيث يكون وجيز ولا يتجاوز سطرين سطرين',
                 style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.outline,
@@ -3555,6 +3563,114 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
       )),
+    );
+  }
+}
+
+class NotificationsPage extends StatefulWidget {
+  const NotificationsPage({Key? key}) : super(key: key);
+
+  @override
+  State<NotificationsPage> createState() => _NotificationsPageState();
+}
+
+class _NotificationsPageState extends State<NotificationsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('الإشعارات'),
+          actions: [
+            Row(
+              children: [
+                Text('قراءة الكل'),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.check_circle_outline,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        body: ListView.builder(
+          itemCount: 30,
+          itemBuilder: (context, index) {
+            return Card(
+                elevation: 0,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.07),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: ListTile(
+                  title: Wrap(
+                    runAlignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.start,
+                    children: [
+                      Text(
+                        'تم استلام حوالة من حساب محمد الأسمر',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('بقيمة ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).colorScheme.outline,
+                              )),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Text(
+                              Random().nextInt(100).toString(),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text('دولار أميركي',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).colorScheme.outline,
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                  leading: Icon(
+                    index % 2 == 0
+                        ? Icons.notifications_none_outlined
+                        : Icons.notifications_active_outlined,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  trailing: Text('منذ 5 دقائق',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.outline,
+                      )),
+                ));
+          },
+        ),
+      ),
     );
   }
 }
