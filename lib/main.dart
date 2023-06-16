@@ -169,15 +169,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return AppBar(
       title: Row(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
+          InkResponse(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              clipBehavior: Clip.antiAlias,
+              height: 40,
+              width: 40,
+              child: Image.network(
+                  'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'),
             ),
-            clipBehavior: Clip.antiAlias,
-            height: 40,
-            width: 40,
-            child: Image.network(
-                'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'),
           ),
           const Spacer(),
           Image.asset(
@@ -299,19 +309,40 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Expanded(
             child: ListView(
               children: [
-                const ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'),
-                  ),
+                ListTile(
+                  leading: InkResponse(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(),
+                          ),
+                        );
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircleAvatar(
+                              radius: 35,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary),
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                                'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80'),
+                          ),
+                        ],
+                      )),
                   title: Text(
-                    'احمد',
+                    'أحمد الأسمر',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text('الباب - الشارع الرئيسي'),
+                  subtitle: Text('حساب شخصي'),
                 ),
-                const Divider(),
+                Divider(
+                  thickness: 0.2,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
                 ListTile(
                   onTap: () {
                     showDialog(
@@ -320,28 +351,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           return _qrCodeWidget();
                         });
                   },
-                  leading: const Icon(Icons.qr_code_outlined),
+                  leading: Icon(Icons.qr_code_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                   title: const Text('رمز حسابك'),
                 ),
                 ListTile(
                   onTap: () {},
                   title: const Text('الدعم الفني'),
-                  leading: const Icon(Icons.support_agent_outlined),
+                  leading: Icon(Icons.support_agent_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
+                ),
+                ListTile(
+                  onTap: () {},
+                  title: const Text('الحوالات الخارجية'),
+                  leading: Icon(Icons.import_export_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 ListTile(
                   onTap: () {},
                   title: const Text('سياسة الخصوصية'),
-                  leading: const Icon(Icons.privacy_tip_outlined),
+                  leading: Icon(Icons.privacy_tip_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 ListTile(
                   onTap: () {},
                   title: const Text('شروط الاستخدام'),
-                  leading: const Icon(Icons.privacy_tip_outlined),
+                  leading: Icon(Icons.privacy_tip_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 ListTile(
                   onTap: () {},
                   title: const Text('من نحن'),
-                  leading: const Icon(Icons.info_outline),
+                  leading: Icon(Icons.info_outline,
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 ListTile(
                   onTap: () {
@@ -349,24 +391,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ? themeModeNotifier.value = ThemeMode.dark
                         : themeModeNotifier.value = ThemeMode.light;
                   },
-                  leading: Icon(themeModeNotifier.value == ThemeMode.light
-                      ? Icons.dark_mode_outlined
-                      : Icons.light_mode_outlined),
+                  leading: Icon(
+                      themeModeNotifier.value == ThemeMode.light
+                          ? Icons.dark_mode_outlined
+                          : Icons.light_mode_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                   title: Text(themeModeNotifier.value == ThemeMode.light
                       ? 'الوضع الليلي'
                       : 'الوضع النهاري'),
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: const Icon(Icons.settings_outlined),
-                  title: const Text('الإعدادات'),
+                  leading: Icon(Icons.settings_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
+                  title: Text(
+                    'الإعدادات',
+                  ),
                 ),
                 ListTile(
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   },
-                  leading: const Icon(Icons.login_outlined),
+                  leading: Icon(Icons.login_outlined,
+                      color: Theme.of(context).colorScheme.secondary),
                   title: const Text('تسجيل الدخول'),
                 ),
               ],
@@ -374,12 +422,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           Column(
             children: [
-              const Divider(),
+              Divider(
+                thickness: 0.2,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               ListTile(
                 onTap: () {},
-                leading: const Icon(Icons.logout_outlined),
+                leading: Icon(Icons.logout_outlined,
+                    color: Theme.of(context).colorScheme.secondary),
                 title: const Text('تسجيل الخروج'),
               ),
+              Text('رقم النسخة 124'),
+              SizedBox(
+                height:8,)
             ],
           )
         ],
@@ -423,7 +478,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 8)),
                 ),
                 Container(
@@ -1099,6 +1154,8 @@ class _PaymentPageState extends State<PaymentPage> {
 
   bool _isDollar = true;
 
+  bool _isAddedToFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -1118,39 +1175,71 @@ class _PaymentPageState extends State<PaymentPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  child: widget.store != null
-                      ? widget.store!.image == null
-                          ? widget.store!.type == 0
-                              ? Icon(
-                                  Icons.storefront,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withOpacity(0.8),
-                                  size: 40,
-                                )
-                              : Icon(
-                                  Icons.person_outline,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withOpacity(0.8),
-                                  size: 40,
-                                )
-                          : null
-                      : Icon(
-                          Icons.storefront,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.8),
-                          size: 40,
-                        ),
-                  backgroundImage: widget.store?.image != null
-                      ? NetworkImage(widget.store!.image!)
-                      : null,
+                Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      child: widget.store != null
+                          ? widget.store!.image == null
+                              ? widget.store!.type == 0
+                                  ? Icon(
+                                      Icons.storefront,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.8),
+                                      size: 40,
+                                    )
+                                  : Icon(
+                                      Icons.person_outline,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.8),
+                                      size: 40,
+                                    )
+                              : null
+                          : Icon(
+                              Icons.storefront,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.8),
+                              size: 40,
+                            ),
+                      backgroundImage: widget.store?.image != null
+                          ? NetworkImage(widget.store!.image!)
+                          : null,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            _isAddedToFavorite = !_isAddedToFavorite;
+                          });
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.7),
+                                shape: BoxShape.circle),
+                            child: _isAddedToFavorite
+                                ? Icon(Icons.favorite,
+                                    size: 25, color: Colors.red)
+                                : Image.asset(
+                                    'assets/images/add_to_favorite.png',
+                                    width: 25,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  )),
+                      ),
+                    )
+                  ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1274,9 +1363,12 @@ class _PaymentPageState extends State<PaymentPage> {
                         [Theme.of(context).colorScheme.primary]
                       ],
                       activeFgColor: Theme.of(context).colorScheme.onSecondary,
-                      inactiveBgColor:
-                          Theme.of(context).colorScheme.outlineVariant,
-                      inactiveFgColor: Theme.of(context).colorScheme.outline,
+                      inactiveBgColor: Theme.of(context)
+                          .colorScheme
+                          .outlineVariant
+                          .withOpacity(0.3),
+                      inactiveFgColor:
+                          Theme.of(context).colorScheme.onSurfaceVariant,
                       initialLabelIndex: _isDollar ? 0 : 1,
                       totalSwitches: 2,
                       labels: ['دولار  \$', 'تركي  TL'],
@@ -2847,8 +2939,8 @@ class _DisplayTransferMoneyDialogState
               ),
               Divider(
                 height: 8,
-                thickness: 1,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                thickness: 0.2,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               // المبلغ المحول, تفقيط
               Container(
@@ -3871,8 +3963,9 @@ class _LoginPageState extends State<LoginPage> {
                   inactiveBgColor: Theme.of(context)
                       .colorScheme
                       .outlineVariant
-                      .withOpacity(0.5),
-                  inactiveFgColor: Theme.of(context).colorScheme.outline,
+                      .withOpacity(0.3),
+                  inactiveFgColor:
+                      Theme.of(context).colorScheme.onSurfaceVariant,
                   initialLabelIndex: _isEmail ? 0 : 1,
                   totalSwitches: 2,
                   labels: ['البريد الإلكتروني', 'رقم الهاتف'],
@@ -3948,24 +4041,24 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                  //login button
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'تسجيل الدخول',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
+                //login button
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'تسجيل الدخول',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
                   ),
+                ),
                 const SizedBox(
                   height: 32,
                 ),
@@ -3975,5 +4068,156 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+}
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text('الملف الشخصي'),
+            ),
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 72,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        CircleAvatar(
+                            radius: 70,
+                            backgroundImage: NetworkImage(
+                                'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80')),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              Icons.edit_outlined,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      'أحمد الأسمر',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'حساب شخصي',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    Divider(
+                      color: Theme.of(context).colorScheme.secondary,
+                      indent: 32,
+                      endIndent: 32,
+                      height: 32,
+                      thickness: 0.2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                              title: Text(
+                                'الجنس',
+                              ),
+                              leading: Icon(
+                                Icons.person_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              trailing: Text('ذكر',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ))),
+                          ListTile(
+                            title: Text('العمر'),
+                            leading: Icon(
+                              Icons.cake_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            trailing: Text('28',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          ListTile(
+                            title: Text('تاريخ الولادة'),
+                            leading: Icon(
+                              Icons.calendar_today_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            trailing: Text('2/7/1993',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          ListTile(
+                            title: Text('مكان الولادة'),
+                            leading: Icon(
+                              Icons.location_on_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            trailing: Text('دمشق',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          ListTile(
+                            title: Text('المهنة'),
+                            leading: Icon(
+                              Icons.work_outline_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            trailing: Text('محاسب مالي',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )));
   }
 }
