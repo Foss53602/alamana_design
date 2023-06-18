@@ -740,42 +740,86 @@ class _HomePageState extends State<HomePage> {
               max: 500,
               initialValue: fakeBalance,
             ),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: SwipeButton(
-                height: 50,
-                width: 200,
-                onSwipeEnd: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height * 0.9,
+            // هذا الزر يظهر فقط لحسابات الشركات
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: SwipeButton(
+                    height: 50,
+                    width: 170,
+                    onSwipeEnd: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.9,
+                        ),
+                        builder: (context) => PaymentPage(),
+                      );
+                    },
+                    thumb: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        size: 20,
+                      ),
                     ),
-                    builder: (context) => PaymentPage(),
-                  );
-                },
-                thumb: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    size: 20,
+                    inactiveTrackColor: Theme.of(context).colorScheme.primary,
+                    activeTrackColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    child: const Text(
+                      '      مرر للدفع',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
-                inactiveTrackColor: Theme.of(context).colorScheme.primary,
-                activeTrackColor:
-                    Theme.of(context).colorScheme.primaryContainer,
-                child: const Text(
-                  'مرر للدفع',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: SwipeButton(
+                    height: 50,
+                    width: 170,
+                    onSwipeEnd: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.9,
+                        ),
+                        builder: (context) => PaymentPage(),
+                      );
+                    },
+                    thumb: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        size: 20,
+                      ),
+                    ),
+                    inactiveTrackColor: Theme.of(context).colorScheme.secondary,
+                    activeTrackColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    child: const Text(
+                      '     مرر للسحب',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             const SizedBox(
               height: 32,
@@ -3919,7 +3963,6 @@ class _LoginPageState extends State<LoginPage> {
               // color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
               borderRadius: BorderRadius.circular(20),
             ),
-            margin: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -3929,7 +3972,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 64,
                 ),
                 Image.asset(
-                  'assets/images/logo_with_color.png',
+                  'assets/images/single_logo.png',
                   height: 110,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -3942,7 +3985,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Theme.of(context).colorScheme.outline,
                     )),
                 const SizedBox(
-                  height: 16,
+                  height: 32,
                 ),
                 ToggleSwitch(
                   minWidth: 120.0,
@@ -4033,24 +4076,10 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                //login button
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'تسجيل الدخول',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
-                  ),
-                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: FilledButton(
+                        onPressed: () {}, child: Text('تسجيل الدخول'))),
                 const SizedBox(
                   height: 32,
                 ),
@@ -4318,103 +4347,258 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/logo_with_color.png',
+                    'assets/images/single_logo.png',
                     height: 110,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  TimelineTile(
-                      alignment: TimelineAlign.manual,
-                      lineXY: 0.05,
-                      isFirst: true,
-                      indicatorStyle: IndicatorStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        iconStyle: IconStyle(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          iconData: Icons.person_outline,
-                        ),
-                        indicatorXY: 0.1,
-                        width: 30,
-                        height: 30,
-                      ),
-                      beforeLineStyle: LineStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        thickness: 6,
-                      ),
-                      endChild: Padding(
-                        padding:
-                            const EdgeInsets.only(right: 4, left: 16, top: 32),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text('قم بإنشاء حسابك الخاص بمفردك',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.outline,
+                      )),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('معلومات الحساب',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Theme.of(context).colorScheme.secondary,
+                              )),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text('معلومات الحساب',
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text('شخصي'),
+                                  value: 0,
+                                  groupValue: 0,
+                                  onChanged: (value) {},
+                                ),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text('شركة'),
+                                  value: 1,
+                                  groupValue: 0,
+                                  onChanged: (value) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'البريد الإلكتروني',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'رقم الهاتف',
+                              isDense: true,
+                              suffixIcon: Container(
+                                width: 45,
+                                margin: const EdgeInsets.only(
+                                    top: 8, bottom: 8, left: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '90+',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .secondary,
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: RadioListTile(
-                                      title: Text('شخصي'),
-                                      value: 0,
-                                      groupValue: 0,
-                                      onChanged: (value) {},
+                                          .onSecondary,
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: RadioListTile(
-                                      title: Text('شركة'),
-                                      value: 1,
-                                      groupValue: 0,
-                                      onChanged: (value) {},
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'البريد الإلكتروني',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.email_outlined,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 8,
+                              prefixIcon: Icon(
+                                Icons.phone_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'رقم الهاتف',
-                                  isDense: true,
-                                  suffixIcon: Container(
-                                    width: 45,
-                                    margin: const EdgeInsets.only(
-                                        top: 8, bottom: 8, left: 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '90+',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'كلمة المرور',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.lock_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'تأكيد كلمة المرور',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.lock_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          // protected by
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          ListTile(
+                            title: Text('الحماية بواسطة'),
+                            leading: Icon(
+                              Icons.security_outlined,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.password_outlined,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text('معلومات المستخدم',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text('ذكر'),
+                                  value: 0,
+                                  groupValue: 0,
+                                  onChanged: (value) {},
+                                ),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text('أنثى'),
+                                  value: 1,
+                                  groupValue: 0,
+                                  onChanged: (value) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'الأسم الأول',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.person_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'الأسم الأخير',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.person_outline,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'مكان وسنة الولادة',
+                              isDense: true,
+                              suffixIcon: Container(
+                                width: 65,
+                                margin: const EdgeInsets.only(
+                                    top: 8, bottom: 8, left: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        '1990',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Theme.of(context)
@@ -4422,351 +4606,145 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                               .onSecondary,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.phone_outlined,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'كلمة المرور',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.lock_outline,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'تأكيد كلمة المرور',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.lock_outline,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              // protected by
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              ListTile(
-                                title: Text('الحماية بواسطة'),
-                                leading: Icon(
-                                  Icons.security_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.password_outlined,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 16,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                            ]),
-                      )),
-                  TimelineDivider(
-                    begin: 0.05,
-                    end: 0.95,
-                    thickness: 6,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  TimelineTile(
-                      alignment: TimelineAlign.manual,
-                      lineXY: 0.95,
-                      beforeLineStyle: LineStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        thickness: 6,
-                      ),
-                      afterLineStyle: LineStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        thickness: 6,
-                      ),
-                      indicatorStyle: IndicatorStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        indicator: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            child: SvgPicture.asset(
-                                'assets/images/user-03-svgrepo-com.svg',
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary)),
-                        indicatorXY: 0.1,
-                        width: 30,
-                        height: 30,
-                      ),
-                      startChild: Padding(
-                        padding:
-                            const EdgeInsets.only(right: 16, left: 4, top: 32),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 32),
-                                  child: Text('معلومات المستخدم',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                      Icon(
+                                        Icons.arrow_drop_down,
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .secondary,
-                                      )),
+                                            .onSecondary,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 16,
+                              prefixIcon: Icon(
+                                Icons.cake_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: RadioListTile(
-                                      title: Text('ذكر'),
-                                      value: 0,
-                                      groupValue: 0,
-                                      onChanged: (value) {},
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: RadioListTile(
-                                      title: Text('أنثى'),
-                                      value: 1,
-                                      groupValue: 0,
-                                      onChanged: (value) {},
-                                    ),
-                                  ),
-                                ],
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'الأسم الأول',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.person_outline,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'العنوان',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.location_on_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          // protected by
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'رقم الهوية',
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.credit_card_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          ListTile(
+                            onTap: () {},
+                            title: const Text('المهنة'),
+                            leading: Icon(Icons.work_outline_outlined,
+                                color: Theme.of(context).colorScheme.secondary),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'محاسب',
+                                  style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.secondary,
                                   ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'الأسم الأخير',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.person_outline,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
+                                SizedBox(
+                                  width: 8,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'مكان وسنة الولادة',
-                                  isDense: true,
-                                  suffixIcon: Container(
-                                    width: 65,
-                                    margin: const EdgeInsets.only(
-                                        top: 8, bottom: 8, left: 8),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Center(
+                            child: Text('هوية الشخصية / شهادة سواقة',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  radius: Radius.circular(20),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  child: Container(
+                                    height: 100,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
                                     ),
                                     child: Center(
-                                      child: Row(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
+                                          Icon(
+                                            Icons.camera_alt_outlined,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          ),
                                           Text(
-                                            '1990',
-                                            textAlign: TextAlign.center,
+                                            'الوجه الأمامي',
                                             style: TextStyle(
                                               color: Theme.of(context)
                                                   .colorScheme
-                                                  .onSecondary,
+                                                  .secondary,
                                             ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                          ),
+                                          )
                                         ],
                                       ),
                                     ),
                                   ),
-                                  prefixIcon: Icon(
-                                    Icons.cake_outlined,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
                                 ),
                               ),
                               const SizedBox(
-                                height: 8,
+                                width: 8,
                               ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'العنوان',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.location_on_outlined,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              // protected by
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'رقم الهوية',
-                                  isDense: true,
-                                  prefixIcon: Icon(
-                                    Icons.credit_card_outlined,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                            ]),
-                      )),
-                  TimelineDivider(
-                    begin: 0.05,
-                    end: 0.95,
-                    thickness: 6,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  TimelineTile(
-                    alignment: TimelineAlign.manual,
-                    lineXY: 0.05,
-                    isLast: true,
-                    beforeLineStyle: LineStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      thickness: 6,
-                    ),
-                    indicatorStyle: IndicatorStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      iconStyle: IconStyle(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        iconData: Icons.card_giftcard_outlined,
-                      ),
-                      indicatorXY: 0.1,
-                      width: 30,
-                      height: 30,
-                    ),
-                    endChild: Padding(
-                      padding:
-                          const EdgeInsets.only(right: 4, left: 16, top: 32),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text('معلومات الإشتراك',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    )),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Center(
-                              child: Text('الهوية الشخصية',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: DottedBorder(
-                                    borderType: BorderType.RRect,
-                                    radius: Radius.circular(20),
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    child: Container(
+                              Expanded(
+                                child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  radius: Radius.circular(20),
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  child: Container(
                                       height: 100,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
@@ -4782,7 +4760,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                                   .secondary,
                                             ),
                                             Text(
-                                              'الوجه الأمامي',
+                                              'الوجه الخلفي',
                                               style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -4791,165 +4769,36 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                             )
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Expanded(
-                                  child: DottedBorder(
-                                    borderType: BorderType.RRect,
-                                    radius: Radius.circular(20),
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    child: Container(
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.camera_alt_outlined,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              ),
-                                              Text(
-                                                'الوجه الخلفي',
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            ListTile(
-                              onTap: () {},
-                              title: const Text('المهنة'),
-                              leading: Icon(Icons.work_outline_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'محاسب',
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 16,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ListTile(
-                              onTap: () {},
-                              title: const Text('باقة الإشتراك'),
-                              leading: Icon(Icons.card_giftcard_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'VIP',
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 16,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // counter months
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                hintText: 'مدة الإشتراك بالأشهر',
-                                isDense: true,
-                                prefixIcon: Icon(
-                                  Icons.calendar_today_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                                      )),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            ListTile(
-                              title: const Text('الأجور'),
-                              leading: Icon(Icons.attach_money_outlined,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              trailing: Text(
-                                '100\$',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
+                              const SizedBox(
+                                width: 8,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                          ]),
-                    ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                        ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: FilledButton(
-                        onPressed: () {},
-                        child: Text('تسجيل'),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).colorScheme.primary),
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))))),
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text('تسجيل'),
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
