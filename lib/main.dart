@@ -260,11 +260,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           _tabController.animateTo(index);
         }
       },
-      children: [
+      children: const [
         HomePage(),
         AdsPage(),
         StoresPage(),
-        WelcomePage(),
+        ServicesPage(),
+        // WelcomePage(),
         SettingsPage(),
       ],
     );
@@ -272,11 +273,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   Widget _drawBottomNavigationBar(BuildContext context) {
     return ConvexAppBar(
-      items: [
+      items: const [
         TabItem(icon: Icons.home_outlined, title: 'رئيسية'),
         TabItem(icon: Icons.ads_click_outlined, title: 'إعلانات'),
         TabItem(icon: Icons.storefront, title: 'المتاجر'),
-        TabItem(icon: Icons.person_outline, title: 'مرحباً'),
+        // TabItem(icon: Icons.person_outline, title: 'مرحباً'),
+        TabItem(icon: Icons.local_offer_outlined, title: 'الخدمات'),
         TabItem(icon: Icons.settings_outlined, title: 'إعدادات'),
       ],
       initialActiveIndex: 0,
@@ -509,12 +511,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               onPressed: () {},
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: const [
                   Text(
                     'مشاركة',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 8,
                   ),
                   Icon(
@@ -1407,7 +1409,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           Theme.of(context).colorScheme.onSurfaceVariant,
                       initialLabelIndex: _isDollar ? 0 : 1,
                       totalSwitches: 2,
-                      labels: ['دولار  \$', 'تركي  TL'],
+                      labels: const ['دولار  \$', 'تركي  TL'],
                       radiusStyle: true,
                       onToggle: (index) {
                         setState(() {
@@ -2020,7 +2022,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(10)),
                             child: DropdownButton(
-                              items: [
+                              items: const [
                                 DropdownMenuItem(
                                   child: Text('2023'),
                                   value: '2023',
@@ -2050,7 +2052,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(10)),
                             child: DropdownButton(
-                              items: [
+                              items: const [
                                 DropdownMenuItem(
                                   child: Text('يناير'),
                                   value: '1',
@@ -3054,7 +3056,7 @@ class _DisplayTransferMoneyDialogState
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: [
+                              children: const [
                                 Text(
                                   'محمد عبد الله',
                                   style: TextStyle(
@@ -3067,7 +3069,7 @@ class _DisplayTransferMoneyDialogState
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14),
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 4,
                                 ),
                                 Text(
@@ -4003,7 +4005,7 @@ class _LoginPageState extends State<LoginPage> {
                       Theme.of(context).colorScheme.onSurfaceVariant,
                   initialLabelIndex: _isEmail ? 0 : 1,
                   totalSwitches: 2,
-                  labels: ['البريد الإلكتروني', 'رقم الهاتف'],
+                  labels: const ['البريد الإلكتروني', 'رقم الهاتف'],
                   radiusStyle: true,
                   onToggle: (index) {
                     setState(() {
@@ -4806,5 +4808,264 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 ],
               ),
             )));
+  }
+}
+
+class ServicesPage extends StatefulWidget {
+  const ServicesPage({super.key});
+
+  @override
+  State<ServicesPage> createState() => _ServicesPageState();
+}
+
+class _ServicesPageState extends State<ServicesPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 16,
+        ),
+        SizedBox(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              elevation: 0,
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 16,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Text(
+                            'شحن رصيد جوال',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'تركي / سوري',
+                          ),
+                        ),
+                        Spacer(), Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'بعض الشرح المبسط عن الخدمة',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16,
+                              vertical: 8),
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                Text('اطلب الآن'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                //whatsapp icon
+                                Icon(
+                                  Icons.arrow_forward_ios,
+size: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: SvgPicture.asset(
+                            'assets/images/undraw_mobile_pay_re_sjb8.svg',
+                            height: 100),
+                      )),
+                ],
+              )),
+        ),
+        SizedBox(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              elevation: 0,
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 16,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Text(
+                            'متجر الكتروني',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ), Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'شرح مبسط عن الخدمة وما تقدمه للعميل',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16,
+                              vertical: 8),
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                Text('تسوق الآن'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                //web site icon
+                                Icon(
+                                  Icons.shopping_bag_outlined,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 22),
+                        child: SvgPicture.asset(
+                            'assets/images/undraw_shopping_app_flsj.svg',
+                            height: 100),
+                      )),
+                ],
+              )),
+        ),
+        SizedBox(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              elevation: 0,
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 16,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Text(
+                            'توصيل طلبات',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),  Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16,
+                              vertical: 16),
+                          child: Text(
+                            'شرح مبسط عن الخدمة وما تقدمه للعميل',
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16,
+                              vertical: 8),
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                Text('اطلب الآن'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: SvgPicture.asset(
+                            'assets/images/undraw_delivery_address_re_cjca.svg',
+                            height: 100),
+                      )),
+                ],
+              )),
+        ),
+      ],
+    )));
   }
 }
