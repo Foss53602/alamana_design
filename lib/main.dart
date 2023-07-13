@@ -4840,75 +4840,93 @@ class _ServicesPageState extends State<ServicesPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Row(
+              child: Stack(
                 children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 16,
-                            left: 16,
-                            right: 16,
-                          ),
-                          child: Text(
-                            'شحن رصيد جوال',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'تركي / سوري',
-                          ),
-                        ),
-                        Spacer(), Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'بعض الشرح المبسط عن الخدمة',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16,
-                              vertical: 8),
-                          child: FilledButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Text('اطلب الآن'),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                //whatsapp icon
-                                Icon(
-                                  Icons.arrow_forward_ios,
-size: 16,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: SvgPicture.asset(
-                            'assets/images/undraw_mobile_pay_re_sjb8.svg',
-                            height: 100),
-                      )),
+                 Positioned.fill(child: Row(
+                   children: [
+                     Expanded(
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Padding(
+                             padding: EdgeInsets.only(
+                               top: 16,
+                               left: 16,
+                               right: 16,
+                             ),
+                             child: Row(
+                               children: [
+                                 Icon(
+                                   Icons.phone_android_outlined,
+                                   color: Theme.of(context).colorScheme.secondary,
+                                 ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                 Text(
+                                   'شحن رصيد جوال',
+                                   style: TextStyle(
+                                     fontSize: 18,
+                                     fontWeight: FontWeight.bold,
+                                   ),
+                                 ), //
+
+                               ],
+                             ),
+                           ),Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 16),
+                             child: Text(
+                               'تركي / سوري',
+                             ),
+                           ),
+                           Spacer(), Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 16),
+                             child: Text(
+                               'بعض الشرح المبسط عن الخدمة',
+                               style: TextStyle(
+                                 fontSize: 14,
+                                 color: Theme.of(context).colorScheme.outline,
+                               ),
+                             ),
+                           ),
+                           Spacer(),
+                           Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 16,
+                                 vertical: 8),
+                             child: FilledButton(
+                               onPressed: () {},
+                               child: Row(
+                                 mainAxisSize: MainAxisSize.min,
+                                 children: const [
+                                   Text('اطلب الآن'),
+                                   SizedBox(
+                                     width: 8,
+                                   ),
+                                   //whatsapp icon
+                                   Icon(
+                                     Icons.arrow_forward_ios,
+                                     size: 16,
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           )
+                         ],
+                       ),
+                     ),
+                     Align(
+                         alignment: Alignment.bottomCenter,
+                         child: Padding(
+                           padding: const EdgeInsets.only(left: 8),
+                           child: SvgPicture.asset(
+                               'assets/images/undraw_mobile_pay_re_sjb8.svg',
+                               height: 100),
+                         )),
+                   ],
+                 ),),
+
+
                 ],
               )),
         ),
@@ -4929,18 +4947,29 @@ size: 16,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                          Padding(
                           padding: EdgeInsets.only(
                             top: 16,
                             left: 16,
                             right: 16,
                           ),
-                          child: Text(
-                            'متجر الكتروني',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            children: [
+
+                              Icon(
+                                Icons.shopping_bag_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),  SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'متجر الكتروني',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ), Spacer(),
                         Padding(
@@ -4949,7 +4978,8 @@ size: 16,
                             'شرح مبسط عن الخدمة وما تقدمه للعميل',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey.shade700,
+                              color: Theme.of(context).colorScheme.outline,
+
                             ),
                           ),
                         ),
@@ -5012,12 +5042,22 @@ size: 16,
                             left: 16,
                             right: 16,
                           ),
-                          child: Text(
-                            'توصيل طلبات',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            children: [
+                                //icon of delivery
+                              Icon( Icons.delivery_dining_outlined,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),  SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'توصيل طلبات',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),  Spacer(),
                         Padding(
@@ -5027,6 +5067,8 @@ size: 16,
                             'شرح مبسط عن الخدمة وما تقدمه للعميل',
                             style: TextStyle(
                               fontSize: 14,
+                              color: Theme.of(context).colorScheme.outline,
+
                             ),
                           ),
                         ),
