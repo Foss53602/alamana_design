@@ -414,8 +414,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         .surfaceVariant,
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              height: 560,
-                              width: 450,
+                              height: 650,
+                              width: 500,
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -429,10 +429,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(16),
-                                                  topRight: Radius.circular(16)),
+                                                  topRight:
+                                                      Radius.circular(16)),
                                               image: DecorationImage(
-                                                image: NetworkImage(
-                                                    url),
+                                                image: NetworkImage(url),
                                                 fit: BoxFit.cover,
                                               )),
                                           child: new BackdropFilter(
@@ -459,8 +459,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                                         .surfaceVariant,
                                             child: CircleAvatar(
                                               radius: 70,
-                                              backgroundImage: NetworkImage(
-                                                  url),
+                                              backgroundImage:
+                                                  NetworkImage(url),
                                             ),
                                           ),
                                         ),
@@ -468,7 +468,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 90,
+                                    height: 80,
+                                  ),
+                                  SizedBox(
+                                    height: 8,
                                   ),
                                   Text(
                                     'حازم لتجارة السيارات',
@@ -485,8 +488,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     children: [
                                       Text(
                                         'الباب - دوار الكف',
-                                        style: TextStyle(
-                                            fontSize: 16),
+                                        style: TextStyle(fontSize: 16),
                                       ),
                                       const SizedBox(
                                         width: 8,
@@ -497,13 +499,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   const SizedBox(
-                                    height: 8,
+                                    height: 16,
                                   ),
-                                  //qr code
+
                                   QrImage(
                                     data: '003348437001',
                                     version: QrVersions.auto,
                                     size: 150.0,
+                                    padding: EdgeInsets.zero,
                                     eyeStyle: QrEyeStyle(
                                       eyeShape: QrEyeShape.circle,
                                       color: Theme.of(context)
@@ -511,8 +514,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                           .onBackground,
                                     ),
                                     dataModuleStyle: QrDataModuleStyle(
-                                      dataModuleShape:
-                                      QrDataModuleShape.circle,
+                                      dataModuleShape: QrDataModuleShape.circle,
                                       color: Theme.of(context)
                                           .colorScheme
                                           .onBackground,
@@ -527,9 +529,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
+                                  SizedBox(height: 2,),
+                                  Divider(
+                                    thickness: 0.2,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary,
                                   ),
+                                  Spacer(),
+                                  Image.asset(
+                                    'assets/images/logo_appBar.png',
+                                    color:
+                                    Theme.of(context).colorScheme.primary,
+                                    width: 200,
+                                  ),
+                                  SizedBox(height: 2,),
+                                  Spacer(),
                                 ],
                               ),
                             ),
