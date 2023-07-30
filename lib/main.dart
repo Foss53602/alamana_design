@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:alamana_design/color_schemes.g.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -395,6 +396,150 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ? 'الوضع الليلي'
                       : 'الوضع النهاري'),
                 ),
+                ListTile(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          var url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRctgwwGeJWS8rsVXMH1kBeDok2SwZC3dFEktZwf1MNajnoAqxujKDkRS-QXVYmNWhZTnQ&usqp=CAU';
+                          return Dialog(
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.white
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .surfaceVariant,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              height: 560,
+                              width: 450,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 200,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Container(
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(16),
+                                                  topRight: Radius.circular(16)),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    url),
+                                                fit: BoxFit.cover,
+                                              )),
+                                          child: new BackdropFilter(
+                                            filter: new ImageFilter.blur(
+                                                sigmaX: 2.0, sigmaY: 2.0),
+                                            child: new Container(
+                                              height: 200,
+                                              decoration: new BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.0)),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: -75,
+                                          child: CircleAvatar(
+                                            radius: 72,
+                                            backgroundColor:
+                                                Theme.of(context).brightness ==
+                                                        Brightness.light
+                                                    ? Colors.white
+                                                    : Theme.of(context)
+                                                        .colorScheme
+                                                        .surfaceVariant,
+                                            child: CircleAvatar(
+                                              radius: 70,
+                                              backgroundImage: NetworkImage(
+                                                  url),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 90,
+                                  ),
+                                  Text(
+                                    'حازم لتجارة السيارات',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.2,
+                                        fontSize: 20),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'الباب - دوار الكف',
+                                        style: TextStyle(
+                                            fontSize: 16),
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  //qr code
+                                  QrImage(
+                                    data: '003348437001',
+                                    version: QrVersions.auto,
+                                    size: 150.0,
+                                    eyeStyle: QrEyeStyle(
+                                      eyeShape: QrEyeShape.circle,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
+                                    dataModuleStyle: QrDataModuleStyle(
+                                      dataModuleShape:
+                                      QrDataModuleShape.circle,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    '003348437001',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  leading: Icon(Icons.qr_code_2,
+                      color: Theme.of(context).colorScheme.secondary),
+                  title: const Text('باركود متجر'),
+                )
               ],
             ),
           ),
@@ -4842,91 +4987,97 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
               child: Stack(
                 children: [
-                 Positioned.fill(child: Row(
-                   children: [
-                     Expanded(
-                       child: Column(
-                         mainAxisAlignment: MainAxisAlignment.start,
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           Padding(
-                             padding: EdgeInsets.only(
-                               top: 16,
-                               left: 16,
-                               right: 16,
-                             ),
-                             child: Row(
-                               children: [
-                                 Icon(
-                                   Icons.phone_android_outlined,
-                                   color: Theme.of(context).colorScheme.secondary,
-                                 ),
-                                  SizedBox(
-                                    width: 8,
+                  Positioned.fill(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: 16,
+                                  left: 16,
+                                  right: 16,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.phone_android_outlined,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      'شحن رصيد جوال',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ), //
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'تركي / سوري',
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'بعض الشرح المبسط عن الخدمة',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color:
+                                        Theme.of(context).colorScheme.outline,
                                   ),
-                                 Text(
-                                   'شحن رصيد جوال',
-                                   style: TextStyle(
-                                     fontSize: 18,
-                                     fontWeight: FontWeight.bold,
-                                   ),
-                                 ), //
-
-                               ],
-                             ),
-                           ),Padding(
-                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                             child: Text(
-                               'تركي / سوري',
-                             ),
-                           ),
-                           Spacer(), Padding(
-                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                             child: Text(
-                               'بعض الشرح المبسط عن الخدمة',
-                               style: TextStyle(
-                                 fontSize: 14,
-                                 color: Theme.of(context).colorScheme.outline,
-                               ),
-                             ),
-                           ),
-                           Spacer(),
-                           Padding(
-                             padding: const EdgeInsets.symmetric(horizontal: 16,
-                                 vertical: 8),
-                             child: FilledButton(
-                               onPressed: () {},
-                               child: Row(
-                                 mainAxisSize: MainAxisSize.min,
-                                 children: const [
-                                   Text('اطلب الآن'),
-                                   SizedBox(
-                                     width: 8,
-                                   ),
-                                   //whatsapp icon
-                                   Icon(
-                                     Icons.arrow_forward_ios,
-                                     size: 16,
-                                   ),
-                                 ],
-                               ),
-                             ),
-                           )
-                         ],
-                       ),
-                     ),
-                     Align(
-                         alignment: Alignment.bottomCenter,
-                         child: Padding(
-                           padding: const EdgeInsets.only(left: 8),
-                           child: SvgPicture.asset(
-                               'assets/images/undraw_mobile_pay_re_sjb8.svg',
-                               height: 100),
-                         )),
-                   ],
-                 ),),
-
-
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                child: FilledButton(
+                                  onPressed: () {},
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Text('اطلب الآن'),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      //whatsapp icon
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: SvgPicture.asset(
+                                  'assets/images/undraw_mobile_pay_re_sjb8.svg',
+                                  height: 100),
+                            )),
+                      ],
+                    ),
+                  ),
                 ],
               )),
         ),
@@ -4947,7 +5098,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                          Padding(
+                        Padding(
                           padding: EdgeInsets.only(
                             top: 16,
                             left: 16,
@@ -4955,11 +5106,11 @@ class _ServicesPageState extends State<ServicesPage> {
                           ),
                           child: Row(
                             children: [
-
                               Icon(
                                 Icons.shopping_bag_outlined,
                                 color: Theme.of(context).colorScheme.secondary,
-                              ),  SizedBox(
+                              ),
+                              SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -4971,7 +5122,8 @@ class _ServicesPageState extends State<ServicesPage> {
                               ),
                             ],
                           ),
-                        ), Spacer(),
+                        ),
+                        Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
@@ -4979,14 +5131,13 @@ class _ServicesPageState extends State<ServicesPage> {
                             style: TextStyle(
                               fontSize: 14,
                               color: Theme.of(context).colorScheme.outline,
-
                             ),
                           ),
                         ),
                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16,
-                              vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           child: FilledButton(
                             onPressed: () {},
                             child: Row(
@@ -5044,10 +5195,12 @@ class _ServicesPageState extends State<ServicesPage> {
                           ),
                           child: Row(
                             children: [
-                                //icon of delivery
-                              Icon( Icons.delivery_dining_outlined,
+                              //icon of delivery
+                              Icon(
+                                Icons.delivery_dining_outlined,
                                 color: Theme.of(context).colorScheme.secondary,
-                              ),  SizedBox(
+                              ),
+                              SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -5059,23 +5212,23 @@ class _ServicesPageState extends State<ServicesPage> {
                               ),
                             ],
                           ),
-                        ),  Spacer(),
+                        ),
+                        Spacer(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16,
-                              vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
                           child: Text(
                             'شرح مبسط عن الخدمة وما تقدمه للعميل',
                             style: TextStyle(
                               fontSize: 14,
                               color: Theme.of(context).colorScheme.outline,
-
                             ),
                           ),
                         ),
                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16,
-                              vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           child: FilledButton(
                             onPressed: () {},
                             child: Row(
