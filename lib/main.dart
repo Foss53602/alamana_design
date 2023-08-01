@@ -401,8 +401,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          var url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRctgwwGeJWS8rsVXMH1kBeDok2SwZC3dFEktZwf1MNajnoAqxujKDkRS-QXVYmNWhZTnQ&usqp=CAU';
+                          var url =
+                              'https://alamanaa.biz/wp-content/uploads/2021/09/image_2021-09-11_19-21-10-2.png';
                           return Dialog(
+                            insetPadding: EdgeInsets.all(16),
                             child: Container(
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
@@ -414,8 +416,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         .surfaceVariant,
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              height: 650,
-                              width: 500,
+                              height: 600,
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -426,24 +427,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       children: [
                                         Container(
                                           height: 200,
+                                          width: double.infinity,
+                                          padding: EdgeInsets.all(8),
                                           decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(16),
                                                   topRight:
-                                                      Radius.circular(16)),
-                                              image: DecorationImage(
-                                                image: NetworkImage(url),
-                                                fit: BoxFit.cover,
-                                              )),
-                                          child: new BackdropFilter(
-                                            filter: new ImageFilter.blur(
-                                                sigmaX: 2.0, sigmaY: 2.0),
-                                            child: new Container(
-                                              height: 200,
-                                              decoration: new BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.0)),
-                                            ),
+                                                      Radius.circular(16))),
+                                          child: Column(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/main_logo.png',
+                                                  color: Colors.white,
+                                                  height: 80),
+                                              Text(
+                                                'متاح للدفع عن طريق تطبيقات الدفع',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Positioned(
@@ -501,7 +507,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   const SizedBox(
                                     height: 16,
                                   ),
-
                                   QrImage(
                                     data: '003348437001',
                                     version: QrVersions.auto,
@@ -529,22 +534,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 2,),
-                                  Divider(
-                                    thickness: 0.2,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary,
+                                  SizedBox(
+                                    height: 8,
                                   ),
-                                  Spacer(),
-                                  Image.asset(
-                                    'assets/images/logo_appBar.png',
-                                    color:
-                                    Theme.of(context).colorScheme.primary,
-                                    width: 200,
-                                  ),
-                                  SizedBox(height: 2,),
-                                  Spacer(),
                                 ],
                               ),
                             ),
