@@ -402,7 +402,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         context: context,
                         builder: (context) {
                           var url =
-                              'https://alamanaa.biz/wp-content/uploads/2021/09/image_2021-09-11_19-21-10-2.png';
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROypRzj56DF7XESq_LjGRn3cQsDWpRFMVoWA&usqp=CAU';
                           return Dialog(
                             insetPadding: EdgeInsets.all(16),
                             child: Container(
@@ -416,7 +416,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         .surfaceVariant,
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              height: 600,
+                              height: 650,
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -444,7 +444,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                                   color: Colors.white,
                                                   height: 80),
                                               Text(
-                                                'متاح للدفع عن طريق تطبيقات الدفع',
+                                                'متاح للدفع عن طريق التطبيق',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18),
@@ -476,15 +476,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   const SizedBox(
                                     height: 80,
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
                                   Text(
                                     'حازم لتجارة السيارات',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1.2,
-                                        fontSize: 20),
+                                        fontSize: 28),
                                   ),
                                   const SizedBox(
                                     height: 8,
@@ -494,7 +491,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     children: [
                                       Text(
                                         'الباب - دوار الكف',
-                                        style: TextStyle(fontSize: 16),
+                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(
                                         width: 8,
@@ -505,34 +502,49 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   const SizedBox(
-                                    height: 16,
+                                    height: 32,
                                   ),
-                                  QrImage(
-                                    data: '003348437001',
-                                    version: QrVersions.auto,
-                                    size: 150.0,
-                                    padding: EdgeInsets.zero,
-                                    eyeStyle: QrEyeStyle(
-                                      eyeShape: QrEyeShape.circle,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
-                                    dataModuleStyle: QrDataModuleStyle(
-                                      dataModuleShape: QrDataModuleShape.circle,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    '003348437001',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          QrImage(
+                                            data: '003348437001',
+                                            version: QrVersions.auto,
+                                            size: 180.0,
+                                            padding: EdgeInsets.zero,
+                                            eyeStyle: QrEyeStyle(
+                                              eyeShape: QrEyeShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
+                                            ),
+                                            dataModuleStyle: QrDataModuleStyle(
+                                              dataModuleShape: QrDataModuleShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 16,
+                                          ),
+                                          Text(
+                                            '003348437001',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Transform.scale(
+                                        scale: 1.1,
+                                        child: Image.asset('assets/images/virtical_logos.png',
+                                          height: 220,),
+                                      )
+                                    ],
                                   ),
                                   SizedBox(
                                     height: 8,
