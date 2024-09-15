@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:alamana_design/ExchangePage.dart';
 import 'package:alamana_design/color_schemes.g.dart';
@@ -372,6 +373,190 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ? 'الوضع الليلي'
                       : 'الوضع النهاري'),
                 ),
+                ListTile(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          var url =
+                              'https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_640.png';
+                          return Dialog(
+                            insetPadding: EdgeInsets.all(16),
+                            clipBehavior: Clip.none,
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.white
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .surfaceVariant,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              height: 623,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Container(
+                                    height: 130,
+                                    width: 130,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            width: 2),
+                                        image: DecorationImage(
+                                            image: NetworkImage(url),
+                                            fit: BoxFit.cover),
+                                        shape: BoxShape.circle),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    'متجر حازم للسيارات',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.2,
+                                        fontSize: 24),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Column(
+                                    children: [
+                                      QrImage(
+                                        data: '003348437001',
+                                        version: QrVersions.auto,
+                                        size: 180,
+                                        padding: EdgeInsets.zero,
+                                        eyeStyle: QrEyeStyle(
+                                          eyeShape: QrEyeShape.circle,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        dataModuleStyle: QrDataModuleStyle(
+                                          dataModuleShape:
+                                              QrDataModuleShape.circle,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        '003348437001',
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    thickness: 0.5,
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'متاح للدفع عن طريق التطبيق',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Theme.of(context).colorScheme.primary,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    'الباب - دوار الكف',
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Icon(
+                                                    Icons.location_on_outlined,
+                                                    color: Theme.of(context).colorScheme.secondary,
+                                                    size: 30,
+                                                  )
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    'حساب متجر',
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Icon(
+                                                    Icons.storefront,
+                                                    color: Theme.of(context).colorScheme.secondary,
+                                                    size: 30,
+                                                  )
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        height: 150,
+                                        color: Colors.grey,
+                                        width: 0.5,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 16, left: 8, bottom: 8),
+                                        child: Image.asset(
+                                          'assets/images/virtical_logos.png',
+                                          height: 140,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  leading: Icon(Icons.qr_code_2,
+                      color: Theme.of(context).colorScheme.secondary),
+                  title: const Text('باركود متجر'),
+                )
               ],
             ),
           ),
@@ -2808,6 +2993,7 @@ class _AdsPageState extends State<AdsPage> {
       body: ListView.builder(
           itemCount: adsImages.length,
           itemBuilder: (BuildContext context, int index) {
+            print(MediaQuery.of(context).size.width);
             return Card(
               clipBehavior: Clip.antiAlias,
               elevation: 0,
