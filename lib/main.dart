@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:alamana_design/ExchangePage.dart';
 import 'package:alamana_design/color_schemes.g.dart';
+import 'package:alamana_design/currencies_widget.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -431,972 +432,721 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 32,
-            ),
-            // SleekCircularSlider(
-            //   innerWidget: (double value) {
-            //     return Column(
-            //       mainAxisSize: MainAxisSize.min,
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [
-            //         const Text('الرصيد الحالي',
-            //             textAlign: TextAlign.end,
-            //             style: TextStyle(
-            //               fontSize: 12,
-            //               fontWeight: FontWeight.bold,
-            //             )),
-            //         Row(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             Row(
-            //               mainAxisSize: MainAxisSize.min,
-            //               textBaseline: TextBaseline.alphabetic,
-            //               crossAxisAlignment: CrossAxisAlignment.baseline,
-            //               mainAxisAlignment: MainAxisAlignment.end,
-            //               children: [
-            //                 Text(
-            //                   '${(value * 100).toInt() % 100}',
-            //                   style: const TextStyle(
-            //                     fontSize: 25,
-            //                     fontWeight: FontWeight.bold,
-            //                   ),
-            //                 ),
-            //                 const Text(
-            //                   '.',
-            //                   style: TextStyle(
-            //                     fontSize: 25,
-            //                     fontWeight: FontWeight.bold,
-            //                   ),
-            //                 ),
-            //                 Text(
-            //                   '${value.toInt()}',
-            //                   style: const TextStyle(
-            //                     fontSize: 28,
-            //                     fontWeight: FontWeight.bold,
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //             const Align(
-            //               alignment: Alignment.centerRight,
-            //               child: Padding(
-            //                   padding: EdgeInsets.only(right: 8),
-            //                   child: Text(
-            //                     '\$',
-            //                     style: TextStyle(
-            //                       fontSize: 28,
-            //                       fontWeight: FontWeight.bold,
-            //                     ),
-            //                   )
-            //                   // SvgPicture.asset(
-            //                   //   'assets/images/flag-um-svgrepo-com.svg',
-            //                   //   width: 20,
-            //                   // ),
-            //                   ),
-            //             )
-            //           ],
-            //         ),
-            //         const SizedBox(
-            //           height: 8,
-            //         ),
-            //         const Text('يعادله',
-            //             textAlign: TextAlign.end,
-            //             style: TextStyle(
-            //               fontSize: 12,
-            //               fontWeight: FontWeight.bold,
-            //             )),
-            //         Showcase(
-            //           key: _one,
-            //           textColor: Theme.of(context).colorScheme.onPrimary,
-            //           tooltipBackgroundColor:
-            //               Theme.of(context).colorScheme.primary,
-            //           titleAlignment: TextAlign.center,
-            //           descriptionAlignment: TextAlign.center,
-            //           title: 'الرصيد التوضيحي',
-            //           description:
-            //               'هو المبلغ بالليرة التركية ويعادل رصيدك الحالي \$ ${fakeBalance.toInt()} ',
-            //           child: Row(
-            //             mainAxisSize: MainAxisSize.min,
-            //             children: [
-            //               Row(
-            //                 textBaseline: TextBaseline.alphabetic,
-            //                 crossAxisAlignment: CrossAxisAlignment.baseline,
-            //                 mainAxisAlignment: MainAxisAlignment.end,
-            //                 children: [
-            //                   Text(
-            //                     '${(value * 100).toInt() % 100}',
-            //                     style: TextStyle(
-            //                       fontSize: 18,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.grey.shade600,
-            //                     ),
-            //                   ),
-            //                   Text(
-            //                     '.',
-            //                     style: TextStyle(
-            //                       fontSize: 18,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.grey.shade600,
-            //                     ),
-            //                   ),
-            //                   Text(
-            //                     '${(value * 23.5).toInt()}',
-            //                     textAlign: TextAlign.end,
-            //                     style: TextStyle(
-            //                       fontSize: 20,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.grey.shade600,
-            //                     ),
-            //                   )
-            //                 ],
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.centerRight,
-            //                 child: Padding(
-            //                     padding: EdgeInsets.only(right: 8),
-            //                     child:
-            //
-            //                         // SvgPicture.asset(
-            //                         //   'assets/images/flag-tn-svgrepo-com.svg',
-            //                         //   width: 20,
-            //                         // ),
-            //
-            //                         Text(
-            //                       'LT',
-            //                       style: TextStyle(
-            //                         fontSize: 18,
-            //                         fontWeight: FontWeight.bold,
-            //                         color: Colors.grey.shade600,
-            //                       ),
-            //                     )
-            //                     // SvgPicture.asset(
-            //                     //   'assets/images/flag-tn-svgrepo-com.svg',
-            //                     //   width: 20,
-            //                     // ),
-            //                     ),
-            //               )
-            //             ],
-            //           ),
-            //         ),
-            //       ],
-            //     );
-            //   },
-            //   appearance: CircularSliderAppearance(
-            //     customColors: CustomSliderColors(
-            //       progressBarColor: Theme.of(context).colorScheme.onPrimary,
-            //       trackColor: Theme.of(context).colorScheme.primary,
-            //       dotColor: Theme.of(context).colorScheme.primary,
-            //     ),
-            //     size: 250,
-            //     customWidths: CustomSliderWidths(
-            //         progressBarWidth: 7,
-            //         trackWidth: 15,
-            //         shadowWidth: 25,
-            //         handlerSize: 2.5),
-            //   ),
-            //   min: 0,
-            //   max: 500,
-            //   initialValue: fakeBalance,
-            // ),
-            SizedBox(
-              height: 210,
-              child: Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Theme.of(context).colorScheme.primary,
-                          Theme.of(context).colorScheme.primary,
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.8),
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.8),
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.8),
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.8),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).colorScheme.primary,
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          // SleekCircularSlider(
+          //   innerWidget: (double value) {
+          //     return Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         const Text('الرصيد الحالي',
+          //             textAlign: TextAlign.end,
+          //             style: TextStyle(
+          //               fontSize: 12,
+          //               fontWeight: FontWeight.bold,
+          //             )),
+          //         Row(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Row(
+          //               mainAxisSize: MainAxisSize.min,
+          //               textBaseline: TextBaseline.alphabetic,
+          //               crossAxisAlignment: CrossAxisAlignment.baseline,
+          //               mainAxisAlignment: MainAxisAlignment.end,
+          //               children: [
+          //                 Text(
+          //                   '${(value * 100).toInt() % 100}',
+          //                   style: const TextStyle(
+          //                     fontSize: 25,
+          //                     fontWeight: FontWeight.bold,
+          //                   ),
+          //                 ),
+          //                 const Text(
+          //                   '.',
+          //                   style: TextStyle(
+          //                     fontSize: 25,
+          //                     fontWeight: FontWeight.bold,
+          //                   ),
+          //                 ),
+          //                 Text(
+          //                   '${value.toInt()}',
+          //                   style: const TextStyle(
+          //                     fontSize: 28,
+          //                     fontWeight: FontWeight.bold,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             const Align(
+          //               alignment: Alignment.centerRight,
+          //               child: Padding(
+          //                   padding: EdgeInsets.only(right: 8),
+          //                   child: Text(
+          //                     '\$',
+          //                     style: TextStyle(
+          //                       fontSize: 28,
+          //                       fontWeight: FontWeight.bold,
+          //                     ),
+          //                   )
+          //                   // SvgPicture.asset(
+          //                   //   'assets/images/flag-um-svgrepo-com.svg',
+          //                   //   width: 20,
+          //                   // ),
+          //                   ),
+          //             )
+          //           ],
+          //         ),
+          //         const SizedBox(
+          //           height: 8,
+          //         ),
+          //         const Text('يعادله',
+          //             textAlign: TextAlign.end,
+          //             style: TextStyle(
+          //               fontSize: 12,
+          //               fontWeight: FontWeight.bold,
+          //             )),
+          //         Showcase(
+          //           key: _one,
+          //           textColor: Theme.of(context).colorScheme.onPrimary,
+          //           tooltipBackgroundColor:
+          //               Theme.of(context).colorScheme.primary,
+          //           titleAlignment: TextAlign.center,
+          //           descriptionAlignment: TextAlign.center,
+          //           title: 'الرصيد التوضيحي',
+          //           description:
+          //               'هو المبلغ بالليرة التركية ويعادل رصيدك الحالي \$ ${fakeBalance.toInt()} ',
+          //           child: Row(
+          //             mainAxisSize: MainAxisSize.min,
+          //             children: [
+          //               Row(
+          //                 textBaseline: TextBaseline.alphabetic,
+          //                 crossAxisAlignment: CrossAxisAlignment.baseline,
+          //                 mainAxisAlignment: MainAxisAlignment.end,
+          //                 children: [
+          //                   Text(
+          //                     '${(value * 100).toInt() % 100}',
+          //                     style: TextStyle(
+          //                       fontSize: 18,
+          //                       fontWeight: FontWeight.bold,
+          //                       color: Colors.grey.shade600,
+          //                     ),
+          //                   ),
+          //                   Text(
+          //                     '.',
+          //                     style: TextStyle(
+          //                       fontSize: 18,
+          //                       fontWeight: FontWeight.bold,
+          //                       color: Colors.grey.shade600,
+          //                     ),
+          //                   ),
+          //                   Text(
+          //                     '${(value * 23.5).toInt()}',
+          //                     textAlign: TextAlign.end,
+          //                     style: TextStyle(
+          //                       fontSize: 20,
+          //                       fontWeight: FontWeight.bold,
+          //                       color: Colors.grey.shade600,
+          //                     ),
+          //                   )
+          //                 ],
+          //               ),
+          //               Align(
+          //                 alignment: Alignment.centerRight,
+          //                 child: Padding(
+          //                     padding: EdgeInsets.only(right: 8),
+          //                     child:
+          //
+          //                         // SvgPicture.asset(
+          //                         //   'assets/images/flag-tn-svgrepo-com.svg',
+          //                         //   width: 20,
+          //                         // ),
+          //
+          //                         Text(
+          //                       'LT',
+          //                       style: TextStyle(
+          //                         fontSize: 18,
+          //                         fontWeight: FontWeight.bold,
+          //                         color: Colors.grey.shade600,
+          //                       ),
+          //                     )
+          //                     // SvgPicture.asset(
+          //                     //   'assets/images/flag-tn-svgrepo-com.svg',
+          //                     //   width: 20,
+          //                     // ),
+          //                     ),
+          //               )
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     );
+          //   },
+          //   appearance: CircularSliderAppearance(
+          //     customColors: CustomSliderColors(
+          //       progressBarColor: Theme.of(context).colorScheme.onPrimary,
+          //       trackColor: Theme.of(context).colorScheme.primary,
+          //       dotColor: Theme.of(context).colorScheme.primary,
+          //     ),
+          //     size: 250,
+          //     customWidths: CustomSliderWidths(
+          //         progressBarWidth: 7,
+          //         trackWidth: 15,
+          //         shadowWidth: 25,
+          //         handlerSize: 2.5),
+          //   ),
+          //   min: 0,
+          //   max: 500,
+          //   initialValue: fakeBalance,
+          // ),
+          CurrenciesWidget(),
+          // هذا الزر يظهر فقط لحسابات الشركات
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [
+          //     Directionality(
+          //       textDirection: TextDirection.ltr,
+          //       child: SwipeButton(
+          //         height: 50,
+          //         width: 170,
+          //         onSwipeEnd: () {
+          //           showModalBottomSheet(
+          //             context: context,
+          //             isScrollControlled: true,
+          //             constraints: BoxConstraints(
+          //               maxHeight: MediaQuery.of(context).size.height * 0.9,
+          //             ),
+          //             builder: (context) => PaymentPage(),
+          //           );
+          //         },
+          //         thumb: Container(
+          //           height: 50,
+          //           width: 50,
+          //           decoration: BoxDecoration(
+          //             color: Theme.of(context).colorScheme.primary,
+          //             shape: BoxShape.circle,
+          //           ),
+          //           child: Icon(
+          //             Icons.arrow_forward_ios_outlined,
+          //             color: Theme.of(context).colorScheme.onPrimary,
+          //             size: 20,
+          //           ),
+          //         ),
+          //         inactiveTrackColor: Theme.of(context).colorScheme.primary,
+          //         activeTrackColor:
+          //             Theme.of(context).colorScheme.primaryContainer,
+          //         child: const Text(
+          //           '      مرر للدفع',
+          //           style: TextStyle(fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //     ),
+          //     Directionality(
+          //       textDirection: TextDirection.ltr,
+          //       child: SwipeButton(
+          //         height: 50,
+          //         width: 170,
+          //         onSwipeEnd: () {
+          //           showModalBottomSheet(
+          //             context: context,
+          //             isScrollControlled: true,
+          //             constraints: BoxConstraints(
+          //               maxHeight: MediaQuery.of(context).size.height * 0.9,
+          //             ),
+          //             builder: (context) => PaymentPage(),
+          //           );
+          //         },
+          //         thumb: Container(
+          //           height: 50,
+          //           width: 50,
+          //           decoration: BoxDecoration(
+          //             color: Theme.of(context).colorScheme.secondary,
+          //             shape: BoxShape.circle,
+          //           ),
+          //           child: Icon(
+          //             Icons.arrow_forward_ios_outlined,
+          //             color: Theme.of(context).colorScheme.onSecondary,
+          //             size: 20,
+          //           ),
+          //         ),
+          //         inactiveTrackColor: Theme.of(context).colorScheme.secondary,
+          //         activeTrackColor:
+          //             Theme.of(context).colorScheme.secondaryContainer,
+          //         child: const Text(
+          //           '     مرر للسحب',
+          //           style: TextStyle(fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FilledButton.icon(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height * 0.9,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/img_3.png',
-                                          color: Colors.white,
-                                          height: 24,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          index == 0
-                                              ? 'حساب الدولار'
-                                              : 'حساب الليرة التركية',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Image.asset(
-                                          index == 0
-                                              ? 'assets/images/img_13.png'
-                                              : 'assets/images/img_14.png',
-                                          height: 30,
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        index == 0
-                                            ? Image.asset(
-                                                'assets/images/img_8.png',
-                                                color: Colors.white,
-                                                height: 35)
-                                            : Image.asset(
-                                                'assets/images/img_7.png',
-                                                color: Colors.white,
-                                                height: 32),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          index == 0 ? '190.16' : '1260.00',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 40,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return _qrCodeWidget(index);
-                                      });
-                                },
-                                child: Image.asset('assets/images/img_11.png',
-                                    color: Colors.white, height: 50),
-                              ),
-                              SizedBox(width: 8),
-                            ],
-                          ),
-                        ),
-                        Spacer(),
-                        ButtonBar(
-                          alignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _cardButton('assets/images/img_24.png', 'تحويل',
-                                () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                constraints: BoxConstraints(
-                                  maxHeight:
-                                      MediaQuery.of(context).size.height * 0.9,
-                                ),
-                                builder: (context) => PaymentPage(),
-                              );
-                            }),
-                            _cardButton('assets/images/img_18.png', 'صرف', () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                constraints: BoxConstraints(
-                                  maxHeight:
-                                  MediaQuery.of(context).size.height * 0.9,
-                                ),
-                                builder: (context) => ExchangePage(),
-                              );
-                            }),
-                            _cardButton('assets/images/img_19.png', 'السجل',
-                                () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RecentOperationsPage(),
-                                ),
-                              );
-                            }),
-                            _cardButton(
-                                'assets/images/img_21.png', 'التقرير', () {}),
-                          ],
-                        ),
-                      ],
+                    builder: (context) => ExchangePage(),
+                  );
+                },
+                label: Text('صرف العملات'),
+                icon: Image.asset(
+                  'assets/images/img_18.png',
+                  height: 24,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+              FilledButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const RecentOperationsPage(),
                     ),
                   );
                 },
-                loop: false,
-                itemCount: 2,
-                viewportFraction: 0.9,
-                scale: 0.95,
-              ),
-            ),
-            // هذا الزر يظهر فقط لحسابات الشركات
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
-            //     Directionality(
-            //       textDirection: TextDirection.ltr,
-            //       child: SwipeButton(
-            //         height: 50,
-            //         width: 170,
-            //         onSwipeEnd: () {
-            //           showModalBottomSheet(
-            //             context: context,
-            //             isScrollControlled: true,
-            //             constraints: BoxConstraints(
-            //               maxHeight: MediaQuery.of(context).size.height * 0.9,
-            //             ),
-            //             builder: (context) => PaymentPage(),
-            //           );
-            //         },
-            //         thumb: Container(
-            //           height: 50,
-            //           width: 50,
-            //           decoration: BoxDecoration(
-            //             color: Theme.of(context).colorScheme.primary,
-            //             shape: BoxShape.circle,
-            //           ),
-            //           child: Icon(
-            //             Icons.arrow_forward_ios_outlined,
-            //             color: Theme.of(context).colorScheme.onPrimary,
-            //             size: 20,
-            //           ),
-            //         ),
-            //         inactiveTrackColor: Theme.of(context).colorScheme.primary,
-            //         activeTrackColor:
-            //             Theme.of(context).colorScheme.primaryContainer,
-            //         child: const Text(
-            //           '      مرر للدفع',
-            //           style: TextStyle(fontWeight: FontWeight.w600),
-            //         ),
-            //       ),
-            //     ),
-            //     Directionality(
-            //       textDirection: TextDirection.ltr,
-            //       child: SwipeButton(
-            //         height: 50,
-            //         width: 170,
-            //         onSwipeEnd: () {
-            //           showModalBottomSheet(
-            //             context: context,
-            //             isScrollControlled: true,
-            //             constraints: BoxConstraints(
-            //               maxHeight: MediaQuery.of(context).size.height * 0.9,
-            //             ),
-            //             builder: (context) => PaymentPage(),
-            //           );
-            //         },
-            //         thumb: Container(
-            //           height: 50,
-            //           width: 50,
-            //           decoration: BoxDecoration(
-            //             color: Theme.of(context).colorScheme.secondary,
-            //             shape: BoxShape.circle,
-            //           ),
-            //           child: Icon(
-            //             Icons.arrow_forward_ios_outlined,
-            //             color: Theme.of(context).colorScheme.onSecondary,
-            //             size: 20,
-            //           ),
-            //         ),
-            //         inactiveTrackColor: Theme.of(context).colorScheme.secondary,
-            //         activeTrackColor:
-            //             Theme.of(context).colorScheme.secondaryContainer,
-            //         child: const Text(
-            //           '     مرر للسحب',
-            //           style: TextStyle(fontWeight: FontWeight.w600),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Text(
-                    'ادفع مباشرة',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      child: Text('عرض الكل',
-                          style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 11,
-                          )),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    InkResponse(
-                      radius: 25,
-                      onTap: () {},
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(right: 8, top: 2, left: 6),
-                        child: DottedBorder(
-                            borderType: BorderType.Circle,
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                            dashPattern: const [4, 2],
-                            padding: const EdgeInsets.all(14),
-                            child: SvgPicture.asset(
-                              'assets/images/users-svgrepo-com.svg',
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                            )),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    const Text(
-                      'أضف',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  ],
+                label: Text('السجل المالي'),
+                icon: Image.asset(
+                  'assets/images/img_19.png',
+                  height: 24,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
-                Expanded(
-                    child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'ادفع مباشرة',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            child: Text('عرض الكل',
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11,
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
                     children: [
-                      for (Store item in imagesAddresses)
-                        SizedBox(
-                          width: 60,
-                          child: Stack(
-                            children: [
-                              Column(
-                                children: [
-                                  item.image != null
-                                      ? InkResponse(
-                                          radius: 25,
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              constraints: BoxConstraints(
-                                                maxHeight:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .height *
-                                                        0.9,
+                      Column(
+                        children: [
+                          InkResponse(
+                            radius: 25,
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 8, top: 2, left: 6),
+                              child: DottedBorder(
+                                  borderType: BorderType.Circle,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                                  dashPattern: const [4, 2],
+                                  padding: const EdgeInsets.all(14),
+                                  child: SvgPicture.asset(
+                                    'assets/images/users-svgrepo-com.svg',
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                                  )),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'أضف',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                      Expanded(
+                          child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (Store item in imagesAddresses)
+                              SizedBox(
+                                width: 60,
+                                child: Stack(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        item.image != null
+                                            ? InkResponse(
+                                                radius: 25,
+                                                onTap: () {
+                                                  showModalBottomSheet(
+                                                    context: context,
+                                                    isScrollControlled: true,
+                                                    constraints: BoxConstraints(
+                                                      maxHeight:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.9,
+                                                    ),
+                                                    builder: (context) =>
+                                                        PaymentPage(
+                                                      store: item,
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(horizontal: 2),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  clipBehavior: Clip.antiAlias,
+                                                  height: 50,
+                                                  width: 50,
+                                                  child: Image.network(
+                                                      item.image.toString(),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                              )
+                                            : InkResponse(
+                                                radius: 25,
+                                                onTap: () {
+                                                  showModalBottomSheet(
+                                                    context: context,
+                                                    isScrollControlled: true,
+                                                    constraints: BoxConstraints(
+                                                      maxHeight:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.9,
+                                                    ),
+                                                    builder: (context) =>
+                                                        PaymentPage(
+                                                      store: item,
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(horizontal: 2),
+                                                  padding:
+                                                      const EdgeInsets.all(12),
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .outline
+                                                          .withOpacity(0.2)),
+                                                  clipBehavior: Clip.antiAlias,
+                                                  child: Icon(
+                                                      item.type == 0
+                                                          ? Icons.storefront
+                                                          : Icons
+                                                              .person_outline,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .outline,
+                                                      size: 28),
+                                                ),
                                               ),
-                                              builder: (context) => PaymentPage(
-                                                store: item,
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            clipBehavior: Clip.antiAlias,
-                                            height: 50,
-                                            width: 50,
-                                            child: Image.network(
-                                                item.image.toString(),
-                                                fit: BoxFit.cover),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        Text(
+                                          item.name,
+                                          textHeightBehavior:
+                                              const TextHeightBehavior(
+                                                  applyHeightToFirstAscent:
+                                                      true),
+                                          textAlign: TextAlign.center,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant,
                                           ),
                                         )
-                                      : InkResponse(
-                                          radius: 25,
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              constraints: BoxConstraints(
-                                                maxHeight:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .height *
-                                                        0.9,
-                                              ),
-                                              builder: (context) => PaymentPage(
-                                                store: item,
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            padding: const EdgeInsets.all(12),
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .outline
-                                                    .withOpacity(0.2)),
-                                            clipBehavior: Clip.antiAlias,
-                                            child: Icon(
-                                                item.type == 0
-                                                    ? Icons.storefront
-                                                    : Icons.person_outline,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .outline,
-                                                size: 28),
+                                      ],
+                                    ),
+                                    // Positioned(
+                                    //     child: Container(
+                                    //       decoration: BoxDecoration(
+                                    //           shape: BoxShape.circle,
+                                    //           border: Border.all(
+                                    //               color: Theme.of(context)
+                                    //                   .colorScheme
+                                    //                   .background,
+                                    //               width: 2)),
+                                    //       child: Image.asset(
+                                    //         Random().nextInt(2) % 2 == 0
+                                    //             ? 'assets/images/img_31.png'
+                                    //             : 'assets/images/img_30.png',
+                                    //         height: 18,
+                                    //       ),
+                                    //     ),
+                                    //     right: -2,
+                                    //     top: -2),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      )),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'العمليات الأخيرة',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        // InkWell(
+                        //   borderRadius: BorderRadius.circular(20),
+                        //   onTap: () {
+                        //     Navigator.of(context).push(
+                        //       MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const RecentOperationsPage(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 8, vertical: 4),
+                        //     child: Row(
+                        //       mainAxisSize: MainAxisSize.min,
+                        //       children: [
+                        //         Text('عرض السجل',
+                        //             style: TextStyle(
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .onSurfaceVariant,
+                        //               fontWeight: FontWeight.w600,
+                        //               fontSize: 11,
+                        //             )),
+                        //         const SizedBox(
+                        //           width: 4,
+                        //         ),
+                        //         Icon(
+                        //           Icons.history,
+                        //           size: 16,
+                        //           color: Theme.of(context)
+                        //               .colorScheme
+                        //               .onSurfaceVariant,
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      for (int i = 0; i < 5; i++)
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return DisplayTransferMoneyDialog(
+                                    transferMoney:
+                                        imagesAddresses.reversed.toList()[i],
+                                  );
+                                });
+                          },
+                          child: Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            elevation: 0,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  imagesAddresses.reversed.toList()[i].image !=
+                                          null
+                                      ? Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
                                           ),
+                                          clipBehavior: Clip.antiAlias,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.network(
+                                              imagesAddresses.reversed
+                                                  .toList()[i]
+                                                  .image
+                                                  .toString(),
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 2),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Icon(
+                                              imagesAddresses.reversed
+                                                          .toList()[i]
+                                                          .type ==
+                                                      0
+                                                  ? Icons.storefront
+                                                  : Icons.person_outline,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.8),
+                                              size: 28),
                                         ),
                                   const SizedBox(
-                                    height: 4,
+                                    width: 4,
                                   ),
-                                  Text(
-                                    item.name,
-                                    textHeightBehavior:
-                                        const TextHeightBehavior(
-                                            applyHeightToFirstAscent: true),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
-                                    ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(imagesAddresses.reversed
+                                          .toList()[i]
+                                          .name),
+                                      Text(
+                                        '10/6/2023 10:30',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Image.asset(
+                                    i % 2 == 0
+                                        ? 'assets/images/img_31.png'
+                                        : 'assets/images/img_30.png',
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '23.24',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      i % 2 == 0
+                                          ? Text(
+                                              '\$',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          : Image.asset(
+                                              'assets/images/img_7.png',
+                                              height: 12)
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  SvgPicture.asset(
+                                    i % 2 == 0
+                                        ? 'assets/images/down-svgrepo-com.svg'
+                                        : 'assets/images/up-svgrepo-com.svg',
+                                    color:
+                                        i % 2 == 0 ? Colors.green : Colors.red,
+                                    height: 35,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
                                   )
                                 ],
                               ),
-                              Positioned(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            width: 2)),
-                                    child: Image.asset(
-                                      Random().nextInt(2) % 2 == 0
-                                          ? 'assets/images/img_10.png'
-                                          : 'assets/images/img_25.png',
-                                      height: 18,
-                                    ),
-                                  ),
-                                  right: -2,
-                                  top: -2),
-                            ],
+                            ),
                           ),
-                        ),
+                        )
                     ],
                   ),
-                )),
-                const SizedBox(
-                  width: 8,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Text(
-                    'العمليات الأخيرة',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const RecentOperationsPage(),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('عرض السجل',
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 11,
-                              )),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Icon(
-                            Icons.history,
-                            size: 16,
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                        ],
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 8,
                   ),
                 ],
               ),
             ),
-            Column(
-              children: [
-                for (int i = 0; i < 5; i++)
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return DisplayTransferMoneyDialog(
-                              transferMoney:
-                                  imagesAddresses.reversed.toList()[i],
-                            );
-                          });
-                    },
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      elevation: 0,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Row(
-                          children: [
-                            imagesAddresses.reversed.toList()[i].image != null
-                                ? Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 2),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    clipBehavior: Clip.antiAlias,
-                                    height: 50,
-                                    width: 50,
-                                    child: Image.network(
-                                        imagesAddresses.reversed
-                                            .toList()[i]
-                                            .image
-                                            .toString(),
-                                        fit: BoxFit.cover),
-                                  )
-                                : Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 2),
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary
-                                            .withOpacity(0.1)),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Icon(
-                                        imagesAddresses.reversed
-                                                    .toList()[i]
-                                                    .type ==
-                                                0
-                                            ? Icons.storefront
-                                            : Icons.person_outline,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary
-                                            .withOpacity(0.8),
-                                        size: 28),
-                                  ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(imagesAddresses.reversed.toList()[i].name),
-                                Text(
-                                  '10/6/2023 10:30',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Image.asset(
-                              i % 2 == 0
-                                  ? 'assets/images/img_13.png'
-                                  : 'assets/images/img_14.png',
-                              height: 20,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '23.24',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                i % 2 == 0
-                                    ? Text(
-                                        '\$',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    : Image.asset('assets/images/img_7.png',
-                                        height: 12)
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            SvgPicture.asset(
-                              i % 2 == 0
-                                  ? 'assets/images/down-svgrepo-com.svg'
-                                  : 'assets/images/up-svgrepo-com.svg',
-                              color: i % 2 == 0 ? Colors.green : Colors.red,
-                              height: 35,
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-          ],
-        ),
+          )
+        ],
       ),
-    );
-  }
-
-  Widget _qrCodeWidget(int index) {
-    return Dialog(
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? Colors.white
-          : Theme.of(context).colorScheme.surfaceVariant,
-      elevation: 0,
-      insetPadding: const EdgeInsets.all(16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 36),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  index == 0
-                      ? 'assets/images/img_13.png'
-                      : 'assets/images/img_14.png',
-                  height: 20,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  'الرمز الخاص بحسابك ${index == 0 ? 'الدولار' : 'التركي'}',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 36,
-            ),
-            SizedBox(
-              width: 270,
-            ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: 270,
-                  height: 270,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 8)),
-                ),
-                Container(
-                  width: 150,
-                  height: 272,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).brightness ==
-                                  Brightness.light
-                              ? Colors.white
-                              : Theme.of(context).colorScheme.surfaceVariant,
-                          width: 10)),
-                ),
-                Container(
-                  width: 272,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).brightness ==
-                                  Brightness.light
-                              ? Colors.white
-                              : Theme.of(context).colorScheme.surfaceVariant,
-                          width: 10)),
-                ),
-                QrImage(
-                  data: '003348437001',
-                  version: QrVersions.auto,
-                  size: 220.0,
-                  eyeStyle: QrEyeStyle(
-                    eyeShape: QrEyeShape.circle,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                  dataModuleStyle: QrDataModuleStyle(
-                    dataModuleShape: QrDataModuleShape.circle,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              '003348437001',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            FilledButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'مشاركة',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Icon(
-                    Icons.share_outlined,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _cardButton(
-      String assetImagePath, String title, GestureTapCallback? onPressed) {
-    return Column(
-      children: [
-        InkWell(
-          onTap: onPressed,
-          child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Image.asset(
-                assetImagePath,
-                color: Theme.of(context).colorScheme.secondary,
-                height: 24,
-              )),
-        ),
-        const SizedBox(height: 4),
-        Text(title,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ],
     );
   }
 }
@@ -1531,7 +1281,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/images/img_13.png',
+                          'assets/images/img_31.png',
                           height: 20,
                         ),
                         SizedBox(
@@ -2260,7 +2010,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   child: Row(
                                     children: [
                                       Image.asset(
-                                        'assets/images/img_13.png',
+                                        'assets/images/img_31.png',
                                         height: 20,
                                       ),
                                       SizedBox(
@@ -2275,7 +2025,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   child: Row(
                                     children: [
                                       Image.asset(
-                                        'assets/images/img_14.png',
+                                        'assets/images/img_30.png',
                                         height: 20,
                                       ),
                                       SizedBox(
@@ -2506,8 +2256,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_13.png'
-                                        : 'assets/images/img_14.png',
+                                        ? 'assets/images/img_31.png'
+                                        : 'assets/images/img_30.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -2663,8 +2413,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_13.png'
-                                        : 'assets/images/img_14.png',
+                                        ? 'assets/images/img_31.png'
+                                        : 'assets/images/img_30.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -2821,8 +2571,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_13.png'
-                                        : 'assets/images/img_14.png',
+                                        ? 'assets/images/img_31.png'
+                                        : 'assets/images/img_30.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -2976,8 +2726,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_13.png'
-                                        : 'assets/images/img_14.png',
+                                        ? 'assets/images/img_31.png'
+                                        : 'assets/images/img_30.png',
                                     height: 20,
                                   ),
                                   SizedBox(

@@ -51,7 +51,7 @@ class _ExchangePageState extends State<ExchangePage> {
                       Row(
                         children: [
                           Image.asset(
-                            'assets/images/img_10.png',
+                            'assets/images/img_31.png',
                             height: 25,
                           ),
                           SizedBox(
@@ -68,7 +68,7 @@ class _ExchangePageState extends State<ExchangePage> {
                       Row(
                         children: [
                           Image.asset(
-                            'assets/images/img_25.png',
+                            'assets/images/img_30.png',
                             height: 25,
                           ),
                           SizedBox(
@@ -117,28 +117,35 @@ class _ExchangePageState extends State<ExchangePage> {
                         children: [
                           Image.asset(
                             replace
-                                ? 'assets/images/img_14.png'
-                                : 'assets/images/img_13.png',
+                                ? 'assets/images/img_30.png'
+                                : 'assets/images/img_31.png',
                             height: 40,
                           ),
                           Spacer(),
-                          InkResponse(
+                          InkWell(
                             onTap: () {
                               setState(() {
                                 replace = !replace;
                               });
                             },
-                            child: Image.asset(
-                              'assets/images/img_18.png',
-                              color: Theme.of(context).colorScheme.secondary,
-                              width: 30,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Theme.of(context).colorScheme.secondary
+                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                              child: Image.asset(
+                                'assets/images/img_18.png',
+                                color: Theme.of(context).colorScheme.onSecondary,
+                                width: 30,
+                              ),
                             ),
                           ),
                           Spacer(),
                           Image.asset(
                             replace
-                                ? 'assets/images/img_13.png'
-                                : 'assets/images/img_14.png',
+                                ? 'assets/images/img_31.png'
+                                : 'assets/images/img_30.png',
                             height: 40,
                           )
                         ],
