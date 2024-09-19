@@ -47,47 +47,56 @@ class _ExchangePageState extends State<ExchangePage> {
                     SizedBox(
                       height: 16,
                     ),
-                    Row(children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/img_31.png',
-                            height: 25,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            '165.27 \$',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/img_30.png',
-                            height: 25,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '3250.00',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              SizedBox(width: 4,),
-                              Image.asset('assets/images/img_7.png',height: 18,)
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],)
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/img_31.png',
+                              height: 25,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              '165.27 \$',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/img_30.png',
+                              height: 25,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '3250.00',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Image.asset(
+                                  'assets/images/img_7.png',
+                                  color: Theme.of(context).colorScheme.primary,
+                                  height: 18,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -130,13 +139,13 @@ class _ExchangePageState extends State<ExchangePage> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Theme.of(context).colorScheme.secondary
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).colorScheme.primary),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               child: Image.asset(
                                 'assets/images/img_18.png',
-                                color: Theme.of(context).colorScheme.onSecondary,
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 width: 30,
                               ),
                             ),
@@ -199,6 +208,9 @@ class _ExchangePageState extends State<ExchangePage> {
                                           padding: const EdgeInsets.all(14),
                                           child: Image.asset(
                                             'assets/images/img_7.png',
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
                                             height: 12,
                                           ),
                                         )
@@ -243,7 +255,9 @@ class _ExchangePageState extends State<ExchangePage> {
                           !replace
                               ? Image.asset(
                                   'assets/images/img_7.png',
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   height: 18,
                                 )
                               : Text(
@@ -270,9 +284,7 @@ class _ExchangePageState extends State<ExchangePage> {
                     ),
                     Center(
                         child: FilledButton(
-                            onPressed: () {
-
-                            }, child: Text('موافق')))
+                            onPressed: () {}, child: Text('موافق')))
                   ],
                 ),
               ),

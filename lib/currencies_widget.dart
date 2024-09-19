@@ -88,7 +88,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                           width: 4,
                         ),
                         Image.asset(
-                          'assets/images/img_7.png',
+                           'assets/images/img_7.png',color: Theme.of(context).colorScheme.onBackground,
                           height: 20,
                         )
                       ],
@@ -229,9 +229,9 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                               children: [
                                 index == 0
                                     ? Image.asset('assets/images/img_8.png',
-                                        color: Colors.white, height: 35)
+                                        color: Theme.of(context).colorScheme.onBackground, height: 35)
                                     : Image.asset('assets/images/img_7.png',
-                                        color: Colors.white, height: 32),
+                                          color: Theme.of(context).colorScheme.onBackground,  height: 32),
                                 const SizedBox(width: 8),
                                 Text(
                                   index == 0 ? '190.16' : '1260.00',
@@ -469,7 +469,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
           color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
           borderRadius: BorderRadius.circular(15),
         ),
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(8),
         child: Row(
           children: [
             Image.asset(
@@ -489,16 +489,14 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
   }
 
   Widget design3() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          children: [
-            Container(
-              margin: EdgeInsets.all(8),
-              width: 210,
-              height: 200,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.all(4),
+              height: 150,
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -512,8 +510,8 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                         angle: 5.8,
                         child: Image.asset(
                           'assets/images/img_311.png',
-                          height: 150 ,
-                          color: Colors.white30,
+                          height: 140,
+                          color: Theme.of(context).colorScheme.background.withOpacity(0.3)
                         )),
                   ),
                   Padding(
@@ -521,9 +519,21 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset('assets/images/img_31.png', height: 50),
+                        Row(
+                          children: [
+                            Image.asset('assets/images/img_31.png', height: 50),
+                            Spacer(),
+                            _cardButton1('assets/images/img_11.png', 'QR', () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return _qrCodeWidget(0);
+                                  });
+                            }, withTitle: false)
+                          ],
+                        ),
                         SizedBox(
-                          height: 8,
+                          height: 16,
                         ),
                         Row(
                           children: [
@@ -534,51 +544,54 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                                 Text(
                                   '50.',
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 const Text(
                                   '165 \$',
                                   style: TextStyle(
-                                      fontSize: 28, fontWeight: FontWeight.bold),
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            _cardButton1('assets/images/img_24.png', 'تحويل', () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                constraints: BoxConstraints(
-                                  maxHeight:
-                                  MediaQuery.of(context).size.height * 0.9,
-                                ),
-                                builder: (context) => PaymentPage(),
-                              );
-                            }),
-                            Spacer(),
-                            _cardButton1('assets/images/img_11.png', 'QR', () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return _qrCodeWidget(1);
-                                  });
-                            }, withTitle: false),
-                          ],
-                        )
+                        // Spacer(),
+                        // Row(
+                        //   children: [
+                        //     _cardButton1('assets/images/img_24.png', 'تحويل', () {
+                        //       showModalBottomSheet(
+                        //         context: context,
+                        //         isScrollControlled: true,
+                        //         constraints: BoxConstraints(
+                        //           maxHeight:
+                        //           MediaQuery.of(context).size.height * 0.9,
+                        //         ),
+                        //         builder: (context) => PaymentPage(),
+                        //       );
+                        //     }),
+                        //     Spacer(),
+                        //     _cardButton1('assets/images/img_11.png', 'QR', () {
+                        //       showDialog(
+                        //           context: context,
+                        //           builder: (context) {
+                        //             return _qrCodeWidget(1);
+                        //           });
+                        //     }, withTitle: false),
+                        //   ],
+                        // )
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(8),
-              width: 210,
-              height: 200,
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.all(4),
+              height: 150,
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -592,8 +605,8 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                         angle: 5.8,
                         child: Image.asset(
                           'assets/images/img_301.png',
-                          height: 150 ,
-                          color: Colors.white30,
+                          height: 140,
+                            color: Theme.of(context).colorScheme.background.withOpacity(0.3)
                         )),
                   ),
                   Padding(
@@ -601,9 +614,21 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset('assets/images/img_30.png', height: 50),
+                        Row(
+                          children: [
+                            Image.asset('assets/images/img_30.png', height: 50),
+                            Spacer(),
+                            _cardButton1('assets/images/img_11.png', 'QR', () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return _qrCodeWidget(1);
+                                  });
+                            }, withTitle: false)
+                          ],
+                        ),
                         SizedBox(
-                          height: 8,
+                          height: 16,
                         ),
                         Row(
                           children: [
@@ -614,53 +639,55 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                                 Text(
                                   '50.',
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 const Text(
                                   '3890',
                                   style: TextStyle(
-                                      fontSize: 28, fontWeight: FontWeight.bold),
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                             const SizedBox(
                               width: 4,
                             ),
-                            Image.asset('assets/images/img_7.png', height: 24),
+                            Image.asset('assets/images/img_7.png',color:Theme.of(context).colorScheme.onBackground, height: 24),
                           ],
                         ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            _cardButton1('assets/images/img_24.png', 'تحويل', () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                constraints: BoxConstraints(
-                                  maxHeight:
-                                      MediaQuery.of(context).size.height * 0.9,
-                                ),
-                                builder: (context) => PaymentPage(),
-                              );
-                            }),
-                            Spacer(),
-                            _cardButton1('assets/images/img_11.png', 'QR', () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return _qrCodeWidget(1);
-                                  });
-                            }, withTitle: false),
-                          ],
-                        )
+                        // Spacer(),
+                        // Row(
+                        //   children: [
+                        //     _cardButton1('assets/images/img_24.png', 'تحويل', () {
+                        //       showModalBottomSheet(
+                        //         context: context,
+                        //         isScrollControlled: true,
+                        //         constraints: BoxConstraints(
+                        //           maxHeight:
+                        //               MediaQuery.of(context).size.height * 0.9,
+                        //         ),
+                        //         builder: (context) => PaymentPage(),
+                        //       );
+                        //     }),
+                        //     Spacer(),
+                        //     _cardButton1('assets/images/img_11.png', 'QR', () {
+                        //       showDialog(
+                        //           context: context,
+                        //           builder: (context) {
+                        //             return _qrCodeWidget(1);
+                        //           });
+                        //     }, withTitle: false),
+                        //   ],
+                        // )
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

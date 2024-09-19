@@ -476,7 +476,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                                 'متاح للدفع عن طريق التطبيق',
                                                 style: TextStyle(
                                                     fontSize: 18,
-                                                    color: Theme.of(context).colorScheme.primary,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -496,7 +498,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                                   ),
                                                   Icon(
                                                     Icons.location_on_outlined,
-                                                    color: Theme.of(context).colorScheme.secondary,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
                                                     size: 30,
                                                   )
                                                 ],
@@ -518,7 +522,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                                   ),
                                                   Icon(
                                                     Icons.storefront,
-                                                    color: Theme.of(context).colorScheme.secondary,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
                                                     size: 30,
                                                   )
                                                 ],
@@ -885,17 +891,35 @@ class _HomePageState extends State<HomePage> {
                     constraints: BoxConstraints(
                       maxHeight: MediaQuery.of(context).size.height * 0.9,
                     ),
-                    builder: (context) => ExchangePage(),
+                    builder: (context) => PaymentPage(),
                   );
                 },
-                label: Text('صرف العملات'),
+                label: Text('تحويل'),
                 icon: Image.asset(
-                  'assets/images/img_18.png',
+                  'assets/images/img_16.png',
                   height: 24,
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
-              FilledButton.icon(
+              OutlinedButton.icon(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height * 0.9,
+                    ),
+                    builder: (context) => ExchangePage(),
+                  );
+                },
+                label: Text('صرف'),
+                icon: Image.asset(
+                  'assets/images/img_18.png',
+                  height: 24,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              OutlinedButton.icon(
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -903,11 +927,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                label: Text('السجل المالي'),
+                label: Text('السجل'),
                 icon: Image.asset(
                   'assets/images/img_19.png',
                   height: 24,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ],
@@ -1299,6 +1323,9 @@ class _HomePageState extends State<HomePage> {
                                             )
                                           : Image.asset(
                                               'assets/images/img_7.png',
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                               height: 12)
                                     ],
                                   ),
@@ -1521,36 +1548,102 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
               ),
             ),
-            Row(children: [
-              SizedBox(
-                width: 16,
+            // Row(children: [
+            //   SizedBox(
+            //     width: 16,
+            //   ),
+            //   Text('الرصيد الحالي',
+            //       textAlign: TextAlign.end,
+            //       style: TextStyle(
+            //         fontSize: 12,
+            //         color: Theme.of(context).colorScheme.secondary,
+            //         fontWeight: FontWeight.bold,
+            //       )),
+            //   SizedBox(
+            //     width: 8,
+            //   ),
+            //   Text(fakeBalance.toString(),
+            //       textAlign: TextAlign.end,
+            //       style: TextStyle(
+            //         fontSize: 18,
+            //         color: Theme.of(context).colorScheme.secondary,
+            //         fontWeight: FontWeight.bold,
+            //       )),
+            //   Text(' \$',
+            //       textAlign: TextAlign.end,
+            //       style: TextStyle(
+            //         fontSize: 16,
+            //         color: Theme.of(context).colorScheme.secondary,
+            //         fontWeight: FontWeight.bold,
+            //       ))
+            // ]),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).colorScheme.surface),
+              padding: EdgeInsets.all(8),
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/img_31.png',
+                              height: 25,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              '165.27 \$',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/img_30.png',
+                              height: 25,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '3250.00',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Image.asset(
+                                  'assets/images/img_7.png',
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  height: 18,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-              Text('الرصيد الحالي',
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontWeight: FontWeight.bold,
-                  )),
-              SizedBox(
-                width: 8,
-              ),
-              Text(fakeBalance.toString(),
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontWeight: FontWeight.bold,
-                  )),
-              Text(' \$',
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontWeight: FontWeight.bold,
-                  ))
-            ]),
-
+            ),
             Container(
                 padding: const EdgeInsets.all(8.0),
                 margin: const EdgeInsets.all(8.0),
@@ -2463,6 +2556,9 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                             )
                                           : Image.asset(
                                               'assets/images/img_7.png',
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                               height: 12)
                                     ],
                                   ),
@@ -2620,6 +2716,9 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                             )
                                           : Image.asset(
                                               'assets/images/img_7.png',
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                               height: 12)
                                     ],
                                   ),
@@ -2778,6 +2877,9 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                             )
                                           : Image.asset(
                                               'assets/images/img_7.png',
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                               height: 12)
                                     ],
                                   ),
@@ -2933,6 +3035,9 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                             )
                                           : Image.asset(
                                               'assets/images/img_7.png',
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                               height: 12)
                                     ],
                                   ),
