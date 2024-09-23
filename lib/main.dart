@@ -889,7 +889,7 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     isScrollControlled: true,
                     constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height * 0.9,
+                      maxHeight: MediaQuery.of(context).size.height * 0.95,
                     ),
                     builder: (context) => PaymentPage(),
                   );
@@ -1134,8 +1134,8 @@ class _HomePageState extends State<HomePage> {
                                     //               width: 2)),
                                     //       child: Image.asset(
                                     //         Random().nextInt(2) % 2 == 0
-                                    //             ? 'assets/images/img_31.png'
-                                    //             : 'assets/images/img_30.png',
+                                    //             ? 'assets/images/img_32.png'
+                                    //             : 'assets/images/img_25.png',
                                     //         height: 18,
                                     //       ),
                                     //     ),
@@ -1301,8 +1301,8 @@ class _HomePageState extends State<HomePage> {
                                   const Spacer(),
                                   Image.asset(
                                     i % 2 == 0
-                                        ? 'assets/images/img_31.png'
-                                        : 'assets/images/img_30.png',
+                                        ? 'assets/images/img_5.png'
+                                        : 'assets/images/img_14.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -1493,7 +1493,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/images/img_31.png',
+                          'assets/images/img_32.png',
                           height: 20,
                         ),
                         SizedBox(
@@ -1578,73 +1578,6 @@ class _PaymentPageState extends State<PaymentPage> {
             //       ))
             // ]),
             Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).colorScheme.surface),
-              padding: EdgeInsets.all(8),
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/img_31.png',
-                              height: 25,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              '165.27 \$',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/img_30.png',
-                              height: 25,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '3250.00',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Image.asset(
-                                  'assets/images/img_7.png',
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                  height: 18,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
                 padding: const EdgeInsets.all(8.0),
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
@@ -1652,9 +1585,81 @@ class _PaymentPageState extends State<PaymentPage> {
                     border: Border.all(color: Colors.grey.shade400)),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 4,
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16) ),
+                      padding: EdgeInsets.all(6),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'الرصيد الحالي',
+                              style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/img_32.png',
+                                      height: 25,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      '165.27 \$',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold, fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/img_25.png',
+                                      height: 25,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '3250.00',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          width: 4,
+                                        ),
+                                        Image.asset(
+                                          'assets/images/img_7.png',
+                                          color: Theme.of(context).colorScheme.onBackground,
+                                          height: 18,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
+                    Divider(
+                      thickness: 0.5,
+                    ),
+                    SizedBox(height: 4,),
                     ToggleSwitch(
                       minWidth: 100.0,
                       cornerRadius: 20.0,
@@ -2288,7 +2293,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   child: Row(
                                     children: [
                                       Image.asset(
-                                        'assets/images/img_31.png',
+                                        'assets/images/img_32.png',
                                         height: 20,
                                       ),
                                       SizedBox(
@@ -2303,7 +2308,7 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   child: Row(
                                     children: [
                                       Image.asset(
-                                        'assets/images/img_30.png',
+                                        'assets/images/img_25.png',
                                         height: 20,
                                       ),
                                       SizedBox(
@@ -2534,8 +2539,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_31.png'
-                                        : 'assets/images/img_30.png',
+                                        ? 'assets/images/img_5.png'
+                                        : 'assets/images/img_14.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -2694,8 +2699,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_31.png'
-                                        : 'assets/images/img_30.png',
+                                        ? 'assets/images/img_5.png'
+                                        : 'assets/images/img_14.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -2855,8 +2860,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_31.png'
-                                        : 'assets/images/img_30.png',
+                                        ? 'assets/images/img_5.png'
+                                        : 'assets/images/img_14.png',
                                     height: 20,
                                   ),
                                   SizedBox(
@@ -3013,8 +3018,8 @@ class _RecentOperationsPageState extends State<RecentOperationsPage> {
                                   const Spacer(),
                                   Image.asset(
                                     Random().nextInt(2) % 2 == 0
-                                        ? 'assets/images/img_31.png'
-                                        : 'assets/images/img_30.png',
+                                        ? 'assets/images/img_5.png'
+                                        : 'assets/images/img_14.png',
                                     height: 20,
                                   ),
                                   SizedBox(

@@ -50,7 +50,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/images/img_31.png',
+                      'assets/images/img_32.png',
                       height: 30,
                     ),
                     SizedBox(
@@ -71,7 +71,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/images/img_30.png',
+                      'assets/images/img_25.png',
                       height: 30,
                     ),
                     SizedBox(
@@ -218,8 +218,8 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                                 const SizedBox(width: 8),
                                 Image.asset(
                                   index == 0
-                                      ? 'assets/images/img_31.png'
-                                      : 'assets/images/img_30.png',
+                                      ? 'assets/images/img_32.png'
+                                      : 'assets/images/img_25.png',
                                   height: 30,
                                 ),
                               ],
@@ -329,8 +329,8 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
               children: [
                 Image.asset(
                   index == 0
-                      ? 'assets/images/img_31.png'
-                      : 'assets/images/img_30.png',
+                      ? 'assets/images/img_32.png'
+                      : 'assets/images/img_25.png',
                   height: 20,
                 ),
                 SizedBox(
@@ -521,7 +521,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                       children: [
                         Row(
                           children: [
-                            Image.asset('assets/images/img_31.png', height: 50),
+                            Image.asset('assets/images/img_32.png', height: 50),
                             Spacer(),
                             _cardButton1('assets/images/img_11.png', 'QR', () {
                               showDialog(
@@ -616,7 +616,7 @@ class _CurrenciesWidgetState extends State<CurrenciesWidget> {
                       children: [
                         Row(
                           children: [
-                            Image.asset('assets/images/img_30.png', height: 50),
+                            Image.asset('assets/images/img_25.png', height: 50),
                             Spacer(),
                             _cardButton1('assets/images/img_11.png', 'QR', () {
                               showDialog(

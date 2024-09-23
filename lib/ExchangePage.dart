@@ -52,7 +52,7 @@ class _ExchangePageState extends State<ExchangePage> {
                         Row(
                           children: [
                             Image.asset(
-                              'assets/images/img_31.png',
+                              'assets/images/img_32.png',
                               height: 25,
                             ),
                             SizedBox(
@@ -69,7 +69,7 @@ class _ExchangePageState extends State<ExchangePage> {
                         Row(
                           children: [
                             Image.asset(
-                              'assets/images/img_30.png',
+                              'assets/images/img_25.png',
                               height: 25,
                             ),
                             SizedBox(
@@ -88,7 +88,7 @@ class _ExchangePageState extends State<ExchangePage> {
                                 ),
                                 Image.asset(
                                   'assets/images/img_7.png',
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.onBackground,
                                   height: 18,
                                 )
                               ],
@@ -126,8 +126,8 @@ class _ExchangePageState extends State<ExchangePage> {
                         children: [
                           Image.asset(
                             replace
-                                ? 'assets/images/img_30.png'
-                                : 'assets/images/img_31.png',
+                                ? 'assets/images/img_25.png'
+                                : 'assets/images/img_32.png',
                             height: 40,
                           ),
                           Spacer(),
@@ -153,8 +153,8 @@ class _ExchangePageState extends State<ExchangePage> {
                           Spacer(),
                           Image.asset(
                             replace
-                                ? 'assets/images/img_31.png'
-                                : 'assets/images/img_30.png',
+                                ? 'assets/images/img_32.png'
+                                : 'assets/images/img_25.png',
                             height: 40,
                           )
                         ],
